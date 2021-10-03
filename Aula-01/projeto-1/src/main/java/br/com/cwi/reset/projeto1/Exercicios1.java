@@ -40,15 +40,19 @@ public class Exercicios1 {
     }
 
     public List<Integer> ordenarLista(List<Integer> numeros) {
-        List<Integer> numerosOrdenados = new ArrayList<>();
+        Integer[] vetorNumeros = new Integer[6];
+        vetorNumeros = numeros.toArray(new Integer[numeros.size()]);
         int temporario = 0;
         for (int i = 0; i < numeros.size() - 1; i++) {
-            if (numeros.get(i) < numeros.get(i + 1)) {
-                temporario = numeros.get(i);
-                numerosOrdenados.add(temporario);
+            for (int j = i + 1; j < numeros.size(); j++) {
+                if (vetorNumeros[j] < vetorNumeros[i]) {
+                    temporario = vetorNumeros[j];
+                    vetorNumeros[j] = vetorNumeros[i];
+                    vetorNumeros[i] = temporario;
+                }
             }
         }
-        return numerosOrdenados;
+        return Arrays.asList(vetorNumeros);
     }
 }
 
