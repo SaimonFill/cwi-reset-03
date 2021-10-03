@@ -9,8 +9,12 @@ public class QuantidadeMinimaItem {
             return ItensPorQuantidade.torta < 10;
         }
 
-        if ("sanduba".equals(item)) {
-            return ItensPorQuantidade.sanduiche == 1;
+        /*
+            o item estava descrito como 'sanduba'
+            alterado condição para a cozinha repor item se tem 1 ou 0 sanduiches
+         */
+        if ("sanduiche".equals(item)) {
+            return ItensPorQuantidade.sanduiche <= 1;
         }
 
         if ("cafe".equals(item)) {

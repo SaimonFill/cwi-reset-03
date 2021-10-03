@@ -2,10 +2,10 @@
 public class Registradora {
 
     public static void main(String[] args) {
-//        primeiroBug();
+        primeiroBug();
 
-        segundoBug();
-
+//        segundoBug();
+//
 //        terceiroBug();
 //
 //        quartoBug();
@@ -24,16 +24,22 @@ public class Registradora {
                     System.out.println("Cozinha fechada!");
                 }
                 ReposicaoCozinha.reporItem(item);
+                System.out.println("Cozinha repor item!");
             }
 
             if ("leite".equals(item) || "cafe".equals(item)) {
                 ReposicaoFornecedor.reporItem(item);
+                System.out.println("Fornecedor repor item!");
             }
         }
 
         return precoItem;
     }
 
+    /*
+     o item no método RelacaoPesoPreco.retornaPrecoProduto(item, quantidade)
+     estava descrito como 'sanduba'
+     */
     private static void primeiroBug() {
         DataProjeto.criarDataComCozinhaFuncionando();
         String item = "sanduiche";
@@ -41,7 +47,7 @@ public class Registradora {
 
         double precoTotal = registrarItem(item, quantidade);
 
-        System.out.println(String.format("Valor total: %.2f", precoTotal));
+        System.out.println(String.format("Valor total: R$ %.2f", precoTotal));
     }
 
     private static void segundoBug() {

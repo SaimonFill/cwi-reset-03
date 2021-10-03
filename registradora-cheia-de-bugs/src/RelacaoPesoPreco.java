@@ -19,8 +19,13 @@ public class RelacaoPesoPreco {
             precoTotal = 9.56 * qtd;
         }
 
-        if ("sanduba".equals(item)) {
+        /*
+            o item estava descrito como 'sanduba'
+            adicionado a subtração da quantidade de itens retirados.
+         */
+        if ("sanduiche".equals(item)) {
             precoTotal = 4.5 * qtd;
+            ItensPorQuantidade.sanduiche -= qtd;
         }
 
         return precoTotal;
