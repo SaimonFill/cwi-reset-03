@@ -7,8 +7,14 @@ public class RelacaoPesoPreco {
             precoTotal = 12.75 * (qtd * 60 / 1000);
         }
 
+        /*
+        a fórmula para calcular o preço da fatia estava errada
+        primeiro tem que divirir o valor total pela qtd de fatias retiradas
+        e depois multiplicar pela qtd de fatias que o cliente solicitou.
+         */
         if ("torta".equals(item)) {
-            precoTotal = 96.00 * (qtd / 16);
+            precoTotal = (96.00 / 16) * qtd;
+            ItensPorQuantidade.torta -= qtd;
         }
 
         if ("leite".equals(item)) {
@@ -20,8 +26,8 @@ public class RelacaoPesoPreco {
         }
 
         /*
-            o item estava descrito como 'sanduba'
-            adicionado a subtração da quantidade de itens retirados.
+        o item estava descrito como 'sanduba'
+        adicionado a subtração da quantidade de itens retirados.
          */
         if ("sanduiche".equals(item)) {
             precoTotal = 4.5 * qtd;

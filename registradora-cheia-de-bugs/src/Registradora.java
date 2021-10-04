@@ -2,10 +2,12 @@
 public class Registradora {
 
     public static void main(String[] args) {
+        System.out.println("primeiroBug()");
         primeiroBug();
 
-//        segundoBug();
-//
+        System.out.println("\nsegundoBug()");
+        segundoBug();
+
 //        terceiroBug();
 //
 //        quartoBug();
@@ -18,16 +20,22 @@ public class Registradora {
     private static double registrarItem(String item, int quantidade) {
         double precoItem = RelacaoPesoPreco.retornaPrecoProduto(item, quantidade);
 
+        /*
+        as ordens das condições estavam erradas,
+        foram ajustadas para atender os requisitos
+         */
         if (QuantidadeMinimaItem.precisaReposicao(item)) {
-            if ("pao".equals(item) || "sanduiche".equals(item) || "torta".equals(item)) {
-                if (!DataProjeto.cozinhaEmFuncionamento()) {
-                    System.out.println("Cozinha fechada!");
-                }
+            if (!DataProjeto.cozinhaEmFuncionamento()) {
+                System.out.println("Cozinha fechada!");
+                System.out.println("Restam apenas "
+                        + ItensPorQuantidade.quantidadeRestanteItens(item)
+                        + " unidades de " + item);
+            }
+            else if ("pao".equals(item) || "sanduiche".equals(item) || "torta".equals(item)) {
                 ReposicaoCozinha.reporItem(item);
                 System.out.println("Cozinha repor item!");
             }
-
-            if ("leite".equals(item) || "cafe".equals(item)) {
+            else if ("leite".equals(item) || "cafe".equals(item)) {
                 ReposicaoFornecedor.reporItem(item);
                 System.out.println("Fornecedor repor item!");
             }
@@ -50,6 +58,10 @@ public class Registradora {
         System.out.println(String.format("Valor total: R$ %.2f", precoTotal));
     }
 
+    /*
+    a qtd na classe ItensPorQuantidade estava errada, tinha 4 ao invés de 16.
+    a formula na RelacaoPesoPreco estava incorreta e foi corrigita.
+     */
     private static void segundoBug() {
         DataProjeto.criarDataComCozinhaEncerradaMasComDiaUtil();
         String item = "torta";
@@ -57,7 +69,7 @@ public class Registradora {
 
         double precoTotal = registrarItem(item, quantidade);
 
-        System.out.println(String.format("Valor total: %.2f", precoTotal));
+        System.out.println(String.format("Valor total: R$ %.2f", precoTotal));
     }
 
     private static void terceiroBug() {

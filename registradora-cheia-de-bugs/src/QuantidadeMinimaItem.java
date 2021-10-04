@@ -10,8 +10,8 @@ public class QuantidadeMinimaItem {
         }
 
         /*
-            o item estava descrito como 'sanduba'
-            alterado condição para a cozinha repor item se tem 1 ou 0 sanduiches
+        o item estava descrito como 'sanduba'
+        alterado condição para a cozinha repor item se tem 1 ou 0 sanduiches
          */
         if ("sanduiche".equals(item)) {
             return ItensPorQuantidade.sanduiche <= 1;
