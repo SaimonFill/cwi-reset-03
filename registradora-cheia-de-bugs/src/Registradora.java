@@ -24,12 +24,12 @@ public class Registradora {
                     System.out.println("Cozinha fechada!");
                 }
                 ReposicaoCozinha.reporItem(item);
-                System.out.println("Cozinha repor item!");
+                System.out.println("Cozinha repor item!"); //adicionado apenas para teste
             }
 
             if ("leite".equals(item) || "cafe".equals(item)) {
                 ReposicaoFornecedor.reporItem(item);
-                System.out.println("Fornecedor repor item!");
+                System.out.println("Fornecedor repor item!"); //adicionado apenas para teste
             }
         }
 
@@ -47,7 +47,9 @@ public class Registradora {
 
         double precoTotal = registrarItem(item, quantidade);
 
-        System.out.println(String.format("Valor total: R$ %.2f", precoTotal));
+        System.out.println(String.format(
+                "Comprado " + quantidade + " " + item +
+                "\nValor total: R$ %.2f", precoTotal));
     }
 
     private static void segundoBug() {
