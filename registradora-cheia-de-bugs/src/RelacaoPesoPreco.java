@@ -21,8 +21,13 @@ public class RelacaoPesoPreco {
             precoTotal = 4.48 * qtd;
         }
 
-        if ("café".equals(item)) {
+        /*
+        o item estava descrito como 'café' (com acento)
+        adicionado a subtração da quantidade de itens retirados.
+         */
+        if ("cafe".equals(item)) {
             precoTotal = 9.56 * qtd;
+            ItensPorQuantidade.cafe -= qtd;
         }
 
         /*

@@ -24,11 +24,17 @@ public class ItensPorQuantidade {
             restante = sanduiche;
         }
 
-        if ("cafe".equals(item)) {
+        /*
+        item estava trocado por 'cafe'
+         */
+        if ("leite".equals(item)) {
             restante = leite;
         }
 
-        if ("leite".equals(item)) {
+        /*
+        item estava trocado por 'leite'
+         */
+        if ("cafe".equals(item)) {
             restante = cafe;
         }
 

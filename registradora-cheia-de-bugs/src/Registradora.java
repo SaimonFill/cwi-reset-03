@@ -8,8 +8,9 @@ public class Registradora {
         System.out.println("\nsegundoBug()");
         segundoBug();
 
-//        terceiroBug();
-//
+        System.out.println("\nterceiroBug()");
+        terceiroBug();
+
 //        quartoBug();
 //
 //        quintoBug();
@@ -25,19 +26,25 @@ public class Registradora {
         foram ajustadas para atender os requisitos
          */
         if (QuantidadeMinimaItem.precisaReposicao(item)) {
+            if ("leite".equals(item) || "cafe".equals(item)) {
+                ReposicaoFornecedor.reporItem(item);
+                System.out.println("Fornecedor repor item!");
+            }
             if (!DataProjeto.cozinhaEmFuncionamento()) {
                 System.out.println("Cozinha fechada!");
-                System.out.println("Restam apenas "
-                        + ItensPorQuantidade.quantidadeRestanteItens(item)
-                        + " unidades de " + item);
+                if (ItensPorQuantidade.quantidadeRestanteItens(item) < 0) {
+                    System.out.println("Estoque indisponível!");
+                    precoItem = 0.0;
+                }
+                else {
+                    System.out.println("Restam "
+                            + ItensPorQuantidade.quantidadeRestanteItens(item)
+                            + " unidades de " + item);
+                }
             }
             else if ("pao".equals(item) || "sanduiche".equals(item) || "torta".equals(item)) {
                 ReposicaoCozinha.reporItem(item);
                 System.out.println("Cozinha repor item!");
-            }
-            else if ("leite".equals(item) || "cafe".equals(item)) {
-                ReposicaoFornecedor.reporItem(item);
-                System.out.println("Fornecedor repor item!");
             }
         }
 
@@ -51,7 +58,7 @@ public class Registradora {
     private static void primeiroBug() {
         DataProjeto.criarDataComCozinhaFuncionando();
         String item = "sanduiche";
-        int quantidade = 4;
+        int quantidade = 20;
 
         double precoTotal = registrarItem(item, quantidade);
 
@@ -65,21 +72,25 @@ public class Registradora {
     private static void segundoBug() {
         DataProjeto.criarDataComCozinhaEncerradaMasComDiaUtil();
         String item = "torta";
-        int quantidade = 10;
+        int quantidade = 16;
 
         double precoTotal = registrarItem(item, quantidade);
 
         System.out.println(String.format("Valor total: R$ %.2f", precoTotal));
     }
 
+    /*
+    na classe RelacaoPesoPreco o item estava descrito como 'café' (com acento)
+    nas classes QuantidadeMinimaItem e ItemPorQuantidade a descrição estava invertida com a do leite.
+     */
     private static void terceiroBug() {
         DataProjeto.criarDataComCozinhaFuncionando();
         String item = "cafe";
-        int quantidade = 40;
+        int quantidade = 5;
 
         double precoTotal = registrarItem(item, quantidade);
 
-        System.out.println(String.format("Valor total: %.2f", precoTotal));
+        System.out.println(String.format("Valor total: R$ %.2f", precoTotal));
     }
 
     private static void quartoBug() {
