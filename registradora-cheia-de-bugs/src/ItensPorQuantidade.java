@@ -13,7 +13,7 @@ public class ItensPorQuantidade {
     public static int quantidadeRestanteItens(String item) {
         int restante = 0;
 
-        if ("paes".equals(item)) {
+        if ("pao".equals(item)) {
             restante = pao;
         }
 

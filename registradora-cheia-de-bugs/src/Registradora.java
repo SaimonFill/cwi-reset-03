@@ -14,6 +14,7 @@ public class Registradora {
         System.out.println("\nquartoBug()");
         quartoBug();
 
+        System.out.println("\nquintoBug()");
         quintoBug();
 
 //        sextoBug();
@@ -117,6 +118,10 @@ public class Registradora {
         System.out.println(String.format("Valor total: R$ %.2f", precoTotal2));
     }
 
+    /*
+    na classe RelacaoPesoPreco foi corrigida a fórmula para calcular o valor do pao
+    e adicionado remoção da quantidade.
+     */
     private static void quintoBug() {
         DataProjeto.criarDataComCozinhaFuncionando();
         String item = "pao";

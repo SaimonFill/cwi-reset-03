@@ -3,8 +3,13 @@ public class RelacaoPesoPreco {
     public static double retornaPrecoProduto(String item, int qtd) {
         double precoTotal = 0;
 
+        /*
+        a fórmula para calcular o preço da fatia estava errada
+        primeiro a quantidade tem que ser transformada em Kg para depois multiplicar pelo valor.
+         */
         if ("pao".equals(item)) {
-            precoTotal = 12.75 * (qtd * 60 / 1000);
+            precoTotal = (qtd * 60 * 0.001) * 12.75;
+            ItensPorQuantidade.pao -= (qtd * 60);
         }
 
         /*
