@@ -24,6 +24,7 @@ public class RelacaoPesoPreco {
 
         if ("leite".equals(item)) {
             precoTotal = 4.48 * qtd;
+            ItensPorQuantidade.leite -= qtd;
         }
 
         /*

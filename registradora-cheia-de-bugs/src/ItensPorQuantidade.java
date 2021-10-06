@@ -24,22 +24,37 @@ public class ItensPorQuantidade {
             restante = sanduiche;
         }
 
-        /*
-        item estava trocado por 'cafe'
-         */
         if ("leite".equals(item)) {
             restante = leite;
         }
 
-        /*
-        item estava trocado por 'leite'
-         */
         if ("cafe".equals(item)) {
             restante = cafe;
         }
-
         return restante;
     }
 
-
+    /*
+    método criado para setar quantidade em 0 caso a quantidade fique negativa
+    se estiver negativo é porque o estoque está zerado e a compra não pode ser concluida
+     */
+    public static void setQuantidadeZero(String item) {
+        if (quantidadeRestanteItens(item) < 0) {
+            if ("pao".equals(item)) {
+                pao = 0;
+            }
+            if ("torta".equals(item)) {
+                torta = 0;
+            }
+            if ("sanduiche".equals(item)) {
+                sanduiche = 0;
+            }
+            if ("leite".equals(item)) {
+                leite = 0;
+            }
+            if ("cafe".equals(item)) {
+                cafe = 0;
+            }
+        }
+    }
 }

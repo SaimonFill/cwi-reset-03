@@ -10,10 +10,10 @@ public class ReposicaoCozinha {
         porque nos requisitos pede reposição de 4 tortas com 16 fatias.
          */
         if ("torta".equals(item)) {
-            ItensPorQuantidade.torta = 64;
+            ItensPorQuantidade.torta += 64;
         }
         if ("sanduiche".equals(item)) {
-            ItensPorQuantidade.sanduiche = 20;
+            ItensPorQuantidade.sanduiche += 20;
         }
     }
 }
