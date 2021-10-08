@@ -1,1 +1,3 @@
-Exercicio para mudar a mensagem do arquivo do github
+Exercicio para mudar a mensagem do arquivo do github.
+
+Fazendo teste de commmit para adicionar descrição.
