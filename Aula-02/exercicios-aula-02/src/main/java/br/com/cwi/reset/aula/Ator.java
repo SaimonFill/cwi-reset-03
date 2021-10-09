@@ -1,20 +1,16 @@
 package br.com.cwi.reset.aula;
 
-public class Ator {
-    private String nome;
-    private Integer idade;
+public class Ator extends Pessoa{
     private Integer oscars;
-    private Genero genero;
 
-    public Ator(String nome, Integer idade, Integer oscars, Genero genero) {
-        this.nome = nome;
-        this.idade = idade;
+    public Ator(String nome, Integer idade, Genero genero, Integer oscars) {
+        super(nome, idade, genero);
         this.oscars = oscars;
-        this.genero = genero;
     }
 
-    public void caracteristica(){
-        System.out.println("Ator " + nome + ", " + idade + " anos, " + genero + " ,Oscars ganhos: " + oscars);
+    @Override
+    public void caracteristica() {
+        super.caracteristica();
+        System.out.print(" Oscars " + oscars);
     }
-
 }
