@@ -3,29 +3,24 @@ package br.com.cwi.reset.aula;
 public class Filme {
 
     private String nomeFilme;
-    private int duracao;
+    private Integer duracao;
     private String descricaoFilme;
-    private String anoLancamento;
-    private int avaliacao;
-    private String nomeDiretor;
-    private int idadeDiretor;
-    private int qtdFilmesDirigidos;
+    private Integer anoLancamento;
+    private Integer avaliacao;
+    private Diretor diretor;
 
-    public Filme(String nomeFilme, int duracao, String descricaoFilme, String anoLancamento, int avaliacao, String nomeDiretor, int idadeDiretor, int qtdFilmesDirigidos) {
+    public Filme(String nomeFilme, Integer duracao, String descricaoFilme, Integer anoLancamento, Integer avaliacao, Diretor diretor) {
         this.nomeFilme = nomeFilme;
         this.duracao = duracao;
         this.descricaoFilme = descricaoFilme;
         this.anoLancamento = anoLancamento;
         this.avaliacao = avaliacao;
-        this.nomeDiretor = nomeDiretor;
-        this.idadeDiretor = idadeDiretor;
-        this.qtdFilmesDirigidos = qtdFilmesDirigidos;
+        this.diretor = diretor;
     }
 
     public void reproduzir() {
         System.out.println("Reproduzindo: " + nomeFilme
                 + "\nDescrição: " + descricaoFilme
-                + "\nDuração: " + duracao + "min"
-                + "\nDiretor: " + nomeDiretor);
+                + "\nDuração: " + duracao + "min");
     }
 }
