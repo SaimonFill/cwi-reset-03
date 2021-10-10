@@ -1,16 +1,13 @@
 package br.com.cwi.reset.aula;
 
+import java.time.LocalDate;
+
 public class Ator extends Pessoa{
+
     private Integer oscars;
 
-    public Ator(String nome, Integer idade, Genero genero, Integer oscars) {
-        super(nome, idade, genero);
+    public Ator(String nome, LocalDate dataNascimento, Genero genero, Integer oscars) {
+        super(nome, dataNascimento, genero);
         this.oscars = oscars;
-    }
-
-    @Override
-    public void caracteristica() {
-        super.caracteristica();
-        System.out.print(" Oscars " + oscars);
     }
 }
