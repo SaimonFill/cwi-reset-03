@@ -22,7 +22,7 @@ public enum Genero {
         this.genero = genero;
     }
 
-    public String getGenero(){
+    public String getGenero() {
         return genero;
     }
 }
