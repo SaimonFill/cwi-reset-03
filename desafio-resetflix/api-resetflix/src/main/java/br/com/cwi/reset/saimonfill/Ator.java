@@ -1,10 +1,11 @@
 package br.com.cwi.reset.saimonfill;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Ator {
 
-    private Integer id;
+    private Integer id = 0;
     private String nome;
     private LocalDate dataNascimento;
     private StatusCarreira statusCarreira;
@@ -25,6 +26,10 @@ public class Ator {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id += id;
+    }
+
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
@@ -35,5 +40,16 @@ public class Ator {
 
     public Integer getAnoInicioAtividade() {
         return anoInicioAtividade;
+    }
+
+    @Override
+    public String toString() {
+        return "Ator{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", statusCarreira=" + statusCarreira +
+                ", anoInicioAtividade=" + anoInicioAtividade +
+                '}';
     }
 }

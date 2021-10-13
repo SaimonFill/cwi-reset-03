@@ -32,4 +32,6 @@ public class AtorRequest {
     public Integer getAnoInicioAtividade() {
         return anoInicioAtividade;
     }
+
+
 }

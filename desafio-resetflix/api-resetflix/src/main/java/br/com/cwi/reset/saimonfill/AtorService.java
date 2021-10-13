@@ -1,9 +1,8 @@
 package br.com.cwi.reset.saimonfill;
 
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class AtorService {
 
@@ -29,6 +28,7 @@ public class AtorService {
                 atorRequest.getAnoInicioAtividade()
         );
 
+        setId();
         fakeDatabase.persisteAtor(ator);
     }
 
@@ -80,8 +80,33 @@ public class AtorService {
                 throw new AtorException("Já existe um ator cadastrado para o nome " + atorRequest.getNome());
             }
         }
-
     }
+
+    public void setId() {
+        List<Ator> listaId = fakeDatabase.recuperaAtores();
+
+        Integer id = 1;
+        ator.setId(id);
+
+        for (int i = 0; i < listaId.size(); i++) {
+            if (ator.getId() == listaId.get(i).getId()) {
+                ator.setId(id);
+            }
+        }
+    }
+
+//    public void atorEmAtividade(){
+//
+//        List<AtorEmAtividade> atoresEmAtividade = new ArrayList<>();
+//
+//        AtorEmAtividade atorEmAtividade = new AtorEmAtividade(
+//                ator.getId(),
+//                ator.getNome(),
+//                ator.getDataNascimento()
+//        );
+//
+//        atorEmAtividade.listarAtoresEmAtividade(null);
+//    }
 
     // Demais métodos da classe
 }
