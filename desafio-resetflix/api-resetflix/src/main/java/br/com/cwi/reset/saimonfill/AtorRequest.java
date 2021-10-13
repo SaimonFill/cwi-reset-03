@@ -29,7 +29,7 @@ public class AtorRequest {
         return statusCarreira;
     }
 
-    public int getAnoInicioAtividade() {
+    public Integer getAnoInicioAtividade() {
         return anoInicioAtividade;
     }
 }

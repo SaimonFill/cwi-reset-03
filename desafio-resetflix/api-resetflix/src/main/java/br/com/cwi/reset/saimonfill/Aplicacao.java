@@ -23,14 +23,13 @@ public class Aplicacao {
         anoInicioAtividade = 1982;
         AtorRequest atorRequest2 = new AtorRequest(nome, dataNascimento, statusCarreira, anoInicioAtividade);
 
-
         atorService.criarAtor(atorRequest1);
         atorService.criarAtor(atorRequest2);
 
         List<Ator> atores = fakeDatabase.recuperaAtores();
 
         System.out.println("Deve conter 1 ator, quantidade encontrada: " + atores.size());
-        System.out.println("Primeiro ator deve ser 'Will Smith', valor encontrado: " + atores.get(0).getId());
-        System.out.println("Primeiro ator deve ser 'Denzel Washington', valor encontrado: " + atores.get(1).getId());
+        System.out.println("Primeiro ator deve ser 'Will Smith', valor encontrado: " + atores.get(0).getNome());
+        System.out.println("Primeiro ator deve ser 'Denzel Washington', valor encontrado: " + atores.get(1).getNome());
     }
 }
