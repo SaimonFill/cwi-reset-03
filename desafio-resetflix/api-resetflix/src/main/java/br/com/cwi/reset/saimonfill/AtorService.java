@@ -6,6 +6,7 @@ import java.util.List;
 
 public class AtorService {
 
+    private AtorEmAtividade atorEmAtividade;
     private FakeDatabase fakeDatabase;
     private Ator ator;
 
@@ -94,19 +95,6 @@ public class AtorService {
             }
         }
     }
-
-//    public void atorEmAtividade(){
-//
-//        List<AtorEmAtividade> atoresEmAtividade = new ArrayList<>();
-//
-//        AtorEmAtividade atorEmAtividade = new AtorEmAtividade(
-//                ator.getId(),
-//                ator.getNome(),
-//                ator.getDataNascimento()
-//        );
-//
-//        atorEmAtividade.listarAtoresEmAtividade(null);
-//    }
 
     // Demais métodos da classe
 }

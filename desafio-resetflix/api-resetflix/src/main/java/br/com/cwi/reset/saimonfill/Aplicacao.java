@@ -45,12 +45,11 @@ public class Aplicacao {
         teste filtro de atores em atividade.
         implementar lógica no método da classe AtorEmAtividade.
          */
-        StatusCarreira filtro = StatusCarreira.EM_ATIVIDADE;
-        List<Ator> listaAtorEmAtividade = atores.stream()
-                .filter(x -> x.getStatusCarreira() == filtro)
-                .collect(Collectors.toList());
+//        StatusCarreira filtro = StatusCarreira.EM_ATIVIDADE;
+//        List<Ator> listaAtorEmAtividade = atores.stream()
+//                .filter(x -> x.getStatusCarreira() == filtro)
+//                .collect(Collectors.toList());
 
-        System.out.println("Atores em atividade: " + listaAtorEmAtividade);
-
+        atorService.atorAtividade();
     }
 }
