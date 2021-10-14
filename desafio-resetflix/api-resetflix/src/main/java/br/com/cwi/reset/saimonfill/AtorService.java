@@ -31,7 +31,6 @@ public class AtorService {
         fakeDatabase.persisteAtor(ator);
     }
 
-    //terminar de implementar a regra do método
     public void verificaCamposObrigatorios(AtorRequest atorRequest) throws AtorException {
 
         if (atorRequest.getNome().isEmpty()) {
@@ -107,28 +106,6 @@ public class AtorService {
         }
 
         return fakeDatabase.filtraAtoresEmAtividade(filtroNome);
-    }
-
-    public Ator consultarAtor(Integer id) throws AtorException {
-        List<Ator> atores = fakeDatabase.recuperaAtores();
-
-        if (id == null) {
-            throw new AtorException("Campo obrigatório não informado. Favor informar o campo ID.");
-        }
-
-        return atores.stream().filter(x -> x.getId().equals(id)).findAny().
-                orElseThrow(() -> new AtorException
-                        ("Nenhum ator encontrado com o parâmetro id=" + id + ", favor verifique os parâmetros informados."));
-    }
-
-    public List<Ator> consultarAtores() throws AtorException {
-        List<Ator> atores = fakeDatabase.recuperaAtores();
-
-        if (atores.isEmpty()) {
-            throw new AtorException("Nenhum ator cadastrado, favor cadastar atores.");
-        }
-
-        return atores;
     }
 
     // Demais métodos da classe

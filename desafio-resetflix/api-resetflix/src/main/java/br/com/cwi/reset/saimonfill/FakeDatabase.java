@@ -26,6 +26,26 @@ public class FakeDatabase {
                 .collect(Collectors.toList());
     }
 
+    public Ator consultarAtor(Integer id) throws AtorException {
+
+        if (id == null) {
+            throw new AtorException("Campo obrigatório não informado. Favor informar o campo ID.");
+        }
+
+        return atores.stream().filter(x -> x.getId().equals(id)).findAny().
+                orElseThrow(() -> new AtorException
+                        ("Nenhum ator encontrado com o parâmetro id=" + id + ", favor verifique os parâmetros informados."));
+    }
+
+    public List<Ator> consultarAtores() throws AtorException {
+
+        if (atores.isEmpty()) {
+            throw new AtorException("Nenhum ator cadastrado, favor cadastar atores.");
+        }
+
+        return atores;
+    }
+
     public void persisteDiretor(Diretor diretor) {
         diretores.add(diretor);
     }

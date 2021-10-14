@@ -44,12 +44,38 @@ public class Aplicacao {
         System.out.println();
 
         //Consulta ator por ID
-        System.out.println("Consulta por ID: " + atorService.consultarAtor(3));
+        System.out.println("Consulta por ID: " + fakeDatabase.consultarAtor(3));
 
         System.out.println();
 
         //Consulta todos os atores
         System.out.println("Lista atores: ");
-        System.out.println(atorService.consultarAtores());
+        System.out.println(fakeDatabase.consultarAtores());
+
+        //Teste diretores
+
+        DiretorService diretorService = new DiretorService((fakeDatabase));
+
+        nome = "Saimon Fill";
+        dataNascimento = LocalDate.of(1996, Month.NOVEMBER, 15);
+        anoInicioAtividade = 2014;
+        DiretorRequest diretorRequest1 = new DiretorRequest(nome, dataNascimento, anoInicioAtividade);
+
+        nome = "Natália Camargo";
+        dataNascimento = LocalDate.of(1996, Month.FEBRUARY, 12);
+        anoInicioAtividade = 2016;
+        DiretorRequest diretorRequest2 = new DiretorRequest(nome, dataNascimento, anoInicioAtividade);
+
+        diretorService.cadastrarDiretor(diretorRequest1);
+        diretorService.cadastrarDiretor(diretorRequest2);
+
+        List<Diretor> diretores = fakeDatabase.recuperaDiretores();
+
+        //Lista diretores
+        System.out.println();
+        for(Diretor diretor : diretores) {
+            System.out.println(diretor.toString());
+        }
+
     }
 }

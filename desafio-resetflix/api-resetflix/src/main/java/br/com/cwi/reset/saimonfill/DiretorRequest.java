@@ -2,17 +2,15 @@ package br.com.cwi.reset.saimonfill;
 
 import java.time.LocalDate;
 
-public class AtorRequest {
+public class DiretorRequest {
 
     private String nome;
     private LocalDate dataNascimento;
-    private StatusCarreira statusCarreira;
-    private int anoInicioAtividade;
+    private Integer anoInicioAtividade;
 
-    public AtorRequest(String nome, LocalDate dataNascimento, StatusCarreira statusCarreira, int anoInicioAtividade) {
+    public DiretorRequest(String nome, LocalDate dataNascimento, Integer anoInicioAtividade) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
-        this.statusCarreira = statusCarreira;
         this.anoInicioAtividade = anoInicioAtividade;
     }
 
@@ -24,11 +22,9 @@ public class AtorRequest {
         return dataNascimento;
     }
 
-    public StatusCarreira getStatusCarreira() {
-        return statusCarreira;
-    }
-
     public Integer getAnoInicioAtividade() {
         return anoInicioAtividade;
     }
+
+
 }
