@@ -18,12 +18,20 @@ public class FakeDatabase {
         return atores;
     }
 
-    public List<AtorEmAtividade> filtraAtoresEmAtividade(String filtroNome) {
+    public List<AtorEmAtividade> filtraAtoresEmAtividade(Optional<String> filtroNome) {
         StatusCarreira filtroCarreira = StatusCarreira.EM_ATIVIDADE;
 
-        return atores.stream().filter(x -> x.getStatusCarreira().equals(filtroCarreira))
-                .map(a -> new AtorEmAtividade(a.getId(), a.getNome(), a.getDataNascimento()))
-                .collect(Collectors.toList());
+        if (filtroNome.equals(Optional.of(""))) {
+            return atores.stream().filter(x -> x.getStatusCarreira().equals(filtroCarreira))
+                    .map(a -> new AtorEmAtividade(a.getId(), a.getNome(), a.getDataNascimento()))
+                    .collect(Collectors.toList());
+        }
+        else {
+            return atores.stream().filter(x -> filtroNome.isPresent() ? x.getNome().equals(filtroNome.get()) : true)
+                    .filter(a -> a.getStatusCarreira().equals(filtroCarreira))
+                    .map(a -> new AtorEmAtividade(a.getId(), a.getNome(), a.getDataNascimento()))
+                    .collect(Collectors.toList());
+        }
     }
 
     public Ator consultarAtor(Integer id) throws AtorException {

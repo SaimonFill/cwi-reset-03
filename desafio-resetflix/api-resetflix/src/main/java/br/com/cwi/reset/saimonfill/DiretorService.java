@@ -18,6 +18,7 @@ public class DiretorService {
         verificaNomeSobrenome(diretorRequest);
         verificaMesmoNome(diretorRequest);
         verificaDataNascimento(diretorRequest);
+        verificaAnoInicioAtividade(diretorRequest);
 
         diretor = new Diretor(
                 diretorRequest.getNome(),
@@ -72,6 +73,18 @@ public class DiretorService {
             if (listaNomes.get(i).getNome().contains(nomeRequerido)) {
                 throw new AtorException("Já existe um diretor cadastrado para o nome " + diretorRequest.getNome());
             }
+        }
+    }
+
+    public void verificaAnoInicioAtividade(DiretorRequest diretorRequest) throws AtorException {
+
+        LocalDate dataNascimento = diretorRequest.getDataNascimento();
+        LocalDate inicioAtividade = LocalDate.ofYearDay(diretorRequest.getAnoInicioAtividade(), 1);
+
+        boolean comparaDatas = dataNascimento.isAfter(inicioAtividade);
+
+        if (comparaDatas) {
+            throw new AtorException("Ano de início de atividade inválido para o diretor cadastrado.");
         }
     }
 

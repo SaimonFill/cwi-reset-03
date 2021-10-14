@@ -20,7 +20,7 @@ public class Aplicacao {
 
         nome = "Denzel Washington";
         dataNascimento = LocalDate.of(1954, Month.DECEMBER, 28);
-        statusCarreira = StatusCarreira.APOSENTADO;
+        statusCarreira = StatusCarreira.EM_ATIVIDADE;
         anoInicioAtividade = 1982;
         AtorRequest atorRequest2 = new AtorRequest(nome, dataNascimento, statusCarreira, anoInicioAtividade);
 
@@ -39,7 +39,8 @@ public class Aplicacao {
         System.out.println();
 
         //Lista os atores em atividade
-        System.out.println("Atores em atividade: " + atorService.listarAtoresEmAtividade(""));
+        System.out.println("Atores em atividade:");
+        System.out.println(atorService.listarAtoresEmAtividade(java.util.Optional.of("")));
 
         System.out.println();
 

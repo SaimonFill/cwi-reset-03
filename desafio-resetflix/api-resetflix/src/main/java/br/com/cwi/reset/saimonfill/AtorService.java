@@ -2,6 +2,7 @@ package br.com.cwi.reset.saimonfill;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class AtorService {
 
@@ -19,6 +20,7 @@ public class AtorService {
         verificaNomeSobrenome(atorRequest);
         verificaMesmoNome(atorRequest);
         verificaDataNascimento(atorRequest);
+        verificaAnoInicioAtividade(atorRequest);
 
         ator = new Ator(
                 atorRequest.getNome(),
@@ -80,6 +82,18 @@ public class AtorService {
         }
     }
 
+    public void verificaAnoInicioAtividade(AtorRequest atorRequest) throws AtorException {
+
+        LocalDate dataNascimento = atorRequest.getDataNascimento();
+        LocalDate inicioAtividade = LocalDate.ofYearDay(atorRequest.getAnoInicioAtividade(), 1);
+
+        boolean comparaDatas = dataNascimento.isAfter(inicioAtividade);
+
+        if (comparaDatas) {
+            throw new AtorException("Ano de início de atividade inválido para o ator cadastrado.");
+        }
+    }
+
     public void setId() {
         List<Ator> listaId = fakeDatabase.recuperaAtores();
 
@@ -93,19 +107,20 @@ public class AtorService {
         }
     }
 
-    public List<AtorEmAtividade> listarAtoresEmAtividade(String filtroNome) throws AtorException {
+    public List<AtorEmAtividade> listarAtoresEmAtividade(Optional<String> filtroNome) throws AtorException {
+
         List<Ator> atores = fakeDatabase.recuperaAtores();
         StatusCarreira filtroCarreira = StatusCarreira.EM_ATIVIDADE;
-        List<AtorEmAtividade> atorEmAtividade = fakeDatabase.filtraAtoresEmAtividade("");
+        List<AtorEmAtividade> atorEmAtividade = fakeDatabase.filtraAtoresEmAtividade(filtroNome);
 
         if (atores.isEmpty()) {
             throw new AtorException("Nenhum ator cadastrado, favor cadastar atores.");
         }
-        if (atorEmAtividade.isEmpty()) {
+        if (atorEmAtividade.contains(filtroCarreira)) {
             throw new AtorException("Ator não encontrato com o filtro " + filtroCarreira + ", favor informar outro filtro.");
         }
 
-        return fakeDatabase.filtraAtoresEmAtividade(filtroNome);
+        return atorEmAtividade;
     }
 
     // Demais métodos da classe
