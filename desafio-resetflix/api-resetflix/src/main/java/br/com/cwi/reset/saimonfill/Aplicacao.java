@@ -44,15 +44,16 @@ public class Aplicacao {
         System.out.println();
 
         //Consulta ator por ID
-        System.out.println("Consulta por ID: " + fakeDatabase.consultarAtor(3));
+        System.out.println("Consulta por ID:");
+        System.out.println(fakeDatabase.consultarAtor(3));
 
         System.out.println();
 
         //Consulta todos os atores
-        System.out.println("Lista atores: ");
+        System.out.println("Lista atores:");
         System.out.println(fakeDatabase.consultarAtores());
 
-        //Teste diretores
+        //Teste diretores -------------------------------------------------------------------------
 
         DiretorService diretorService = new DiretorService((fakeDatabase));
 
@@ -73,9 +74,12 @@ public class Aplicacao {
 
         //Lista diretores
         System.out.println();
-        for(Diretor diretor : diretores) {
-            System.out.println(diretor.toString());
-        }
+        System.out.println("Lista Diretores:");
+        System.out.println(fakeDatabase.listarDiretores(""));
 
+        //Consulta diretor por ID
+        System.out.println();
+        System.out.println("Consulta diretor por ID:");
+        System.out.println(fakeDatabase.consultarDiretor(1));
     }
 }

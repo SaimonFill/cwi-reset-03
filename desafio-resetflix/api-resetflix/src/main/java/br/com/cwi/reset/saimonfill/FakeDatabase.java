@@ -53,4 +53,24 @@ public class FakeDatabase {
     public List<Diretor> recuperaDiretores() {
         return diretores;
     }
+
+    public List<Diretor> listarDiretores(String filtroNome) throws AtorException {
+
+        if (diretores.isEmpty()) {
+            throw new AtorException("Nenhum diretor cadastrado, favor cadastar atores.");
+        }
+
+        return diretores;
+    }
+
+    public Diretor consultarDiretor(Integer id) throws AtorException {
+
+        if (id == null) {
+            throw new AtorException("Campo obrigatório não informado. Favor informar o campo ID.");
+        }
+
+        return diretores.stream().filter(x -> x.getId().equals(id)).findAny().
+                orElseThrow(() -> new AtorException
+                        ("Nenhum diretor encontrado com o parâmetro id=" + id + ", favor verifique os parâmetros informados."));
+    }
 }
