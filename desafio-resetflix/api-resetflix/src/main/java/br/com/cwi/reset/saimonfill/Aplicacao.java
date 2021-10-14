@@ -20,7 +20,7 @@ public class Aplicacao {
 
         nome = "Denzel Washington";
         dataNascimento = LocalDate.of(1954, Month.DECEMBER, 28);
-        statusCarreira = StatusCarreira.EM_ATIVIDADE;
+        statusCarreira = StatusCarreira.APOSENTADO;
         anoInicioAtividade = 1982;
         AtorRequest atorRequest2 = new AtorRequest(nome, dataNascimento, statusCarreira, anoInicioAtividade);
 
@@ -36,20 +36,13 @@ public class Aplicacao {
 
         List<Ator> atores = fakeDatabase.recuperaAtores();
 
+        //Lista os atores
         for (Ator ator : atores) {
             System.out.println(ator.toString());
         }
         System.out.println();
 
-        /*
-        teste filtro de atores em atividade.
-        implementar lógica no método da classe AtorEmAtividade.
-         */
-//        StatusCarreira filtro = StatusCarreira.EM_ATIVIDADE;
-//        List<Ator> listaAtorEmAtividade = atores.stream()
-//                .filter(x -> x.getStatusCarreira() == filtro)
-//                .collect(Collectors.toList());
-
-        atorService.atorAtividade();
+        //Lista os atores em atividade
+        System.out.println("Atores em atividade:" + atorService.listarAtoresEmAtividade(""));
     }
 }

@@ -1,12 +1,10 @@
 package br.com.cwi.reset.saimonfill;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AtorService {
 
-    private AtorEmAtividade atorEmAtividade;
     private FakeDatabase fakeDatabase;
     private Ator ator;
 
@@ -94,6 +92,20 @@ public class AtorService {
                 ator.setId(id);
             }
         }
+    }
+
+    public List<AtorEmAtividade> listarAtoresEmAtividade(String filtroNome) throws AtorException {
+        List<Ator> atores = fakeDatabase.recuperaAtores();
+        StatusCarreira filtroCarreira = StatusCarreira.EM_ATIVIDADE;
+        List<AtorEmAtividade> atorEmAtividade = fakeDatabase.filtraAtoresEmAtividade("");
+
+        if (atores.isEmpty()){
+            throw new AtorException("Nenhum ator cadastrado, favor cadastar atores.");
+        }
+        if (atorEmAtividade.isEmpty()){
+            throw new AtorException("Ator não encontrato com o filtro " + filtroCarreira + ", favor informar outro filtro.");
+        }
+        return fakeDatabase.filtraAtoresEmAtividade(filtroNome);
     }
 
     // Demais métodos da classe
