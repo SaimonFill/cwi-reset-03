@@ -99,13 +99,26 @@ public class AtorService {
         StatusCarreira filtroCarreira = StatusCarreira.EM_ATIVIDADE;
         List<AtorEmAtividade> atorEmAtividade = fakeDatabase.filtraAtoresEmAtividade("");
 
-        if (atores.isEmpty()){
+        if (atores.isEmpty()) {
             throw new AtorException("Nenhum ator cadastrado, favor cadastar atores.");
         }
-        if (atorEmAtividade.isEmpty()){
+        if (atorEmAtividade.isEmpty()) {
             throw new AtorException("Ator não encontrato com o filtro " + filtroCarreira + ", favor informar outro filtro.");
         }
+
         return fakeDatabase.filtraAtoresEmAtividade(filtroNome);
+    }
+
+    public Ator consultarAtor(Integer id) throws AtorException {
+        List<Ator> atores = fakeDatabase.recuperaAtores();
+
+        if (id == null) {
+            throw new AtorException("Campo obrigatório não informado. Favor informar o campo ID.");
+        }
+
+        return atores.stream().filter(x -> x.getId().equals(id)).findAny().
+                orElseThrow(() -> new AtorException
+                        ("Nenhum ator encontrado com o parâmetro id=" + id + ", favor verifique os parâmetros informados."));
     }
 
     // Demais métodos da classe

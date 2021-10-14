@@ -40,9 +40,15 @@ public class Aplicacao {
         for (Ator ator : atores) {
             System.out.println(ator.toString());
         }
+
         System.out.println();
 
         //Lista os atores em atividade
-        System.out.println("Atores em atividade:" + atorService.listarAtoresEmAtividade(""));
+        System.out.println("Atores em atividade: " + atorService.listarAtoresEmAtividade(""));
+
+        System.out.println();
+
+        //Consulta ator por ID
+        System.out.println("Consulta por ID: " + atorService.consultarAtor(4));
     }
 }
