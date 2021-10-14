@@ -36,11 +36,6 @@ public class Aplicacao {
 
         List<Ator> atores = fakeDatabase.recuperaAtores();
 
-        //Lista os atores
-        for (Ator ator : atores) {
-            System.out.println(ator.toString());
-        }
-
         System.out.println();
 
         //Lista os atores em atividade
@@ -49,6 +44,12 @@ public class Aplicacao {
         System.out.println();
 
         //Consulta ator por ID
-        System.out.println("Consulta por ID: " + atorService.consultarAtor(4));
+        System.out.println("Consulta por ID: " + atorService.consultarAtor(3));
+
+        System.out.println();
+
+        //Consulta todos os atores
+        System.out.println("Lista atores: ");
+        System.out.println(atorService.consultarAtores());
     }
 }

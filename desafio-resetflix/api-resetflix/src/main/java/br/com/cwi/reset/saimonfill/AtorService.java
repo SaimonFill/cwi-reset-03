@@ -121,5 +121,15 @@ public class AtorService {
                         ("Nenhum ator encontrado com o parâmetro id=" + id + ", favor verifique os parâmetros informados."));
     }
 
+    public List<Ator> consultarAtores() throws AtorException {
+        List<Ator> atores = fakeDatabase.recuperaAtores();
+
+        if (atores.isEmpty()) {
+            throw new AtorException("Nenhum ator cadastrado, favor cadastar atores.");
+        }
+
+        return atores;
+    }
+
     // Demais métodos da classe
 }
