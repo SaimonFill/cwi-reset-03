@@ -6,7 +6,7 @@ public class Diretor extends Pessoa{
 
     private Integer qtdFilmesDirigidos;
 
-    public Diretor(String nome, LocalDate dataNascimento, Genero genero, Integer qtdFilmesDirigidos) {
+    public Diretor(String nome, Integer dataNascimento, Genero genero, Integer qtdFilmesDirigidos) {
         super(nome, dataNascimento, genero);
         this.qtdFilmesDirigidos = qtdFilmesDirigidos;
     }
