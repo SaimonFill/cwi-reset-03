@@ -1,20 +1,12 @@
 package br.com.cwi.reset.saimonfill;
 
-import br.com.cwi.reset.saimonfill.model.Ator;
-import br.com.cwi.reset.saimonfill.model.Diretor;
-import br.com.cwi.reset.saimonfill.model.StatusCarreira;
-import br.com.cwi.reset.saimonfill.request.AtorRequest;
-import br.com.cwi.reset.saimonfill.request.DiretorRequest;
-import br.com.cwi.reset.saimonfill.service.AtorService;
-import br.com.cwi.reset.saimonfill.service.DiretorService;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.List;
-
+@SpringBootApplication
 public class Aplicacao {
 
-    public static void main(String[] args) throws Exception {
-
+    public static void main(String[] args) {
+        SpringApplication.run(Aplicacao.class, args);
     }
 }
