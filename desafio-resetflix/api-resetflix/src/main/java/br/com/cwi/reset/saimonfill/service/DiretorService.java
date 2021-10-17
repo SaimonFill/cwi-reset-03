@@ -1,4 +1,9 @@
-package br.com.cwi.reset.saimonfill;
+package br.com.cwi.reset.saimonfill.service;
+
+import br.com.cwi.reset.saimonfill.FakeDatabase;
+import br.com.cwi.reset.saimonfill.exception.AtorException;
+import br.com.cwi.reset.saimonfill.model.Diretor;
+import br.com.cwi.reset.saimonfill.request.DiretorRequest;
 
 import java.time.LocalDate;
 import java.util.List;

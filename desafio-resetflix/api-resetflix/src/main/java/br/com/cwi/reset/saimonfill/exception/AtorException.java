@@ -1,4 +1,4 @@
-package br.com.cwi.reset.saimonfill;
+package br.com.cwi.reset.saimonfill.exception;
 
 public class AtorException extends Exception {
 

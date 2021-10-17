@@ -1,7 +1,6 @@
-package br.com.cwi.reset.saimonfill;
+package br.com.cwi.reset.saimonfill.model;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Ator {
 

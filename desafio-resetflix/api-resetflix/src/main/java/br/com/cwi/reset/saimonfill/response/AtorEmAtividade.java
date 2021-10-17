@@ -1,4 +1,4 @@
-package br.com.cwi.reset.saimonfill;
+package br.com.cwi.reset.saimonfill.response;
 
 import java.time.LocalDate;
 

@@ -31,4 +31,13 @@ public class FilmeController {
         filmes.add(filme);
         return filme;
     }
+
+    private Filme buscaFilmePeloNome(String nome) {
+        for (Filme filme : filmes) {
+            if (filme.getNomeFilme().equals(nome)){
+                return filme;
+            }
+        }
+        return null;
+    }
 }

@@ -1,5 +1,11 @@
 package br.com.cwi.reset.saimonfill;
 
+import br.com.cwi.reset.saimonfill.exception.AtorException;
+import br.com.cwi.reset.saimonfill.model.Ator;
+import br.com.cwi.reset.saimonfill.model.Diretor;
+import br.com.cwi.reset.saimonfill.model.StatusCarreira;
+import br.com.cwi.reset.saimonfill.response.AtorEmAtividade;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,11 @@
-package br.com.cwi.reset.saimonfill;
+package br.com.cwi.reset.saimonfill.service;
+
+import br.com.cwi.reset.saimonfill.FakeDatabase;
+import br.com.cwi.reset.saimonfill.exception.AtorException;
+import br.com.cwi.reset.saimonfill.model.Ator;
+import br.com.cwi.reset.saimonfill.model.StatusCarreira;
+import br.com.cwi.reset.saimonfill.request.AtorRequest;
+import br.com.cwi.reset.saimonfill.response.AtorEmAtividade;
 
 import java.time.LocalDate;
 import java.util.List;
