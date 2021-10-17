@@ -2,15 +2,15 @@ package br.com.cwi.reset.primeiroprojetospring.domain;
 
 public class Filme {
 
-    private String nomeFilme;
+    private String nome;
     private Integer duracao;
     private String descricaoFilme;
     private Integer anoLancamento;
     private Integer avaliacao;
     private Diretor diretor;
 
-    public Filme(String nomeFilme, Integer duracao, String descricaoFilme, Integer anoLancamento, Diretor diretor, Integer avaliacao) throws AvaliacaoForaDoPadraoException {
-        this.nomeFilme = nomeFilme;
+    public Filme(String nome, Integer duracao, String descricaoFilme, Integer anoLancamento, Diretor diretor, Integer avaliacao) throws AvaliacaoForaDoPadraoException {
+        this.nome = nome;
         this.duracao = duracao;
         this.descricaoFilme = descricaoFilme;
         this.anoLancamento = anoLancamento;
@@ -22,54 +22,54 @@ public class Filme {
     }
 
     public void reproduzir() {
-        System.out.println("Reproduzindo: " + nomeFilme
+        System.out.println("Reproduzindo: " + nome
                 + "\nDescrição: " + descricaoFilme
                 + "\nDuração: " + duracao + "min"
                 + "\nAvaliação: " + avaliacao);
     }
 
-    public String getNomeFilme() {
-        return nomeFilme;
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Integer getDuracao() {
         return duracao;
     }
 
-    public String getDescricaoFilme() {
-        return descricaoFilme;
-    }
-
-    public Integer getAnoLancamento() {
-        return anoLancamento;
-    }
-
-    public Integer getAvaliacao() {
-        return avaliacao;
-    }
-
-    public Diretor getDiretor() {
-        return diretor;
-    }
-
-    public void setNomeFilme(String nomeFilme) {
-        this.nomeFilme = nomeFilme;
-    }
-
     public void setDuracao(Integer duracao) {
         this.duracao = duracao;
+    }
+
+    public String getDescricaoFilme() {
+        return descricaoFilme;
     }
 
     public void setDescricaoFilme(String descricaoFilme) {
         this.descricaoFilme = descricaoFilme;
     }
 
+    public Integer getAnoLancamento() {
+        return anoLancamento;
+    }
+
     public void setAnoLancamento(Integer anoLancamento) {
         this.anoLancamento = anoLancamento;
     }
 
+    public Integer getAvaliacao() {
+        return avaliacao;
+    }
+
     public void setAvaliacao(Integer avaliacao) {
         this.avaliacao = avaliacao;
+    }
+
+    public Diretor getDiretor() {
+        return diretor;
     }
 
     public void setDiretor(Diretor diretor) {
