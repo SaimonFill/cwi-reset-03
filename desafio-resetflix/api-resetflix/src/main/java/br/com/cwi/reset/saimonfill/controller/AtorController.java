@@ -26,9 +26,9 @@ public class AtorController {
         this.atorService.criarAtor(atorRequest);
     }
 
-    @GetMapping("/{em_atividade}")
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public List<AtorEmAtividade> listarAtoresEmAtividade(String filtroNome) throws Exception {
+    @GetMapping("/em_atividade")
+    @ResponseStatus(HttpStatus.OK)
+    public List<AtorEmAtividade> listarAtoresEmAtividade(@PathVariable String filtroNome) throws Exception {
         return atorService.listarAtoresEmAtividade(java.util.Optional.of(""));
     }
 
