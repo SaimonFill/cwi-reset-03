@@ -1,7 +1,7 @@
 package br.com.cwi.reset.saimonfill.service;
 
 import br.com.cwi.reset.saimonfill.FakeDatabase;
-import br.com.cwi.reset.saimonfill.exception.AtorException;
+import br.com.cwi.reset.saimonfill.exception.*;
 import br.com.cwi.reset.saimonfill.model.Diretor;
 import br.com.cwi.reset.saimonfill.request.DiretorRequest;
 
@@ -17,7 +17,7 @@ public class DiretorService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    public void cadastrarDiretor(DiretorRequest diretorRequest) throws AtorException {
+    public void cadastrarDiretor(DiretorRequest diretorRequest) throws Exception {
 
         verificaCamposObrigatorios(diretorRequest);
         verificaNomeSobrenome(diretorRequest);
@@ -35,53 +35,53 @@ public class DiretorService {
         fakeDatabase.persisteDiretor(diretor);
     }
 
-    public void verificaCamposObrigatorios(DiretorRequest diretorRequest) throws AtorException {
+    public void verificaCamposObrigatorios(DiretorRequest diretorRequest) throws Exception {
 
         if (diretorRequest.getNome().isEmpty()) {
-            throw new AtorException("Campo obrigatório não informado. Favor informar o campo 'Nome'.");
+            throw new NomeNaoInformadoException();
         }
         if (diretorRequest.getDataNascimento() == null) {
-            throw new AtorException("Campo obrigatório não informado. Favor informar o campo 'dataNascimento'.");
+            throw new DataNascimentoNaoInformadoException();
         }
         if (diretorRequest.getAnoInicioAtividade() == null) {
-            throw new AtorException("Campo obrigatório não informado. Favor informar o campo 'anoInicioAtividade'.");
+            throw new AnoInicioAtividadeNaoInformadoException();
         }
     }
 
-    public void verificaNomeSobrenome(DiretorRequest diretorRequest) throws AtorException {
+    public void verificaNomeSobrenome(DiretorRequest diretorRequest) throws Exception {
 
         String nome = diretorRequest.getNome();
         String[] arrayNome = nome.split(" ");
 
         if (arrayNome.length <= 1) {
-            throw new AtorException("Deve ser informado no mínimo nome e sobrenome para o diretor.");
+            throw new InformarNomeSobrenomeException("diretor");
         }
     }
 
-    public void verificaDataNascimento(DiretorRequest diretorRequest) throws AtorException {
+    public void verificaDataNascimento(DiretorRequest diretorRequest) throws Exception {
 
         LocalDate dataAtual = LocalDate.now();
         LocalDate dataNascimento = diretorRequest.getDataNascimento();
         boolean comparaDatas = dataNascimento.isAfter(dataAtual);
 
         if (comparaDatas) {
-            throw new AtorException("Não é possível cadastrar diretores não nascidos.");
+            throw new NaoCadastrarNaoNacidosException("diretor");
         }
     }
 
-    public void verificaMesmoNome(DiretorRequest diretorRequest) throws AtorException {
+    public void verificaMesmoNome(DiretorRequest diretorRequest) throws Exception {
 
         List<Diretor> listaNomes = fakeDatabase.recuperaDiretores();
         String nomeRequerido = diretorRequest.getNome();
 
         for (int i = 0; i < listaNomes.size(); i++) {
             if (listaNomes.get(i).getNome().contains(nomeRequerido)) {
-                throw new AtorException("Já existe um diretor cadastrado para o nome " + diretorRequest.getNome());
+                throw new JaExisteCadastradoException("diretor", nomeRequerido);
             }
         }
     }
 
-    public void verificaAnoInicioAtividade(DiretorRequest diretorRequest) throws AtorException {
+    public void verificaAnoInicioAtividade(DiretorRequest diretorRequest) throws Exception {
 
         LocalDate dataNascimento = diretorRequest.getDataNascimento();
         LocalDate inicioAtividade = LocalDate.ofYearDay(diretorRequest.getAnoInicioAtividade(), 1);
@@ -89,7 +89,7 @@ public class DiretorService {
         boolean comparaDatas = dataNascimento.isAfter(inicioAtividade);
 
         if (comparaDatas) {
-            throw new AtorException("Ano de início de atividade inválido para o diretor cadastrado.");
+            throw new AnoInicioInvalidoException("diretor");
         }
     }
 

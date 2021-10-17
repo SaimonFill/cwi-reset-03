@@ -1,9 +1,9 @@
 package br.com.cwi.reset.saimonfill;
 
-import br.com.cwi.reset.saimonfill.exception.AtorException;
-import br.com.cwi.reset.saimonfill.model.Ator;
-import br.com.cwi.reset.saimonfill.model.Diretor;
-import br.com.cwi.reset.saimonfill.model.StatusCarreira;
+import br.com.cwi.reset.saimonfill.exception.CampoNaoInformadoException;
+import br.com.cwi.reset.saimonfill.exception.ConsultarPeloIdException;
+import br.com.cwi.reset.saimonfill.exception.ListaVaziaException;
+import br.com.cwi.reset.saimonfill.model.*;
 import br.com.cwi.reset.saimonfill.response.AtorEmAtividade;
 
 import java.util.ArrayList;
@@ -13,8 +13,20 @@ import java.util.stream.Collectors;
 
 public class FakeDatabase {
 
+    private static FakeDatabase fakeDatabase = new FakeDatabase();
+
+    public static FakeDatabase getInstance() {
+        return fakeDatabase;
+    }
+
+    private FakeDatabase() {
+    }
+
     private List<Ator> atores = new ArrayList<>();
     private List<Diretor> diretores = new ArrayList<>();
+    private List<Estudio> estudios = new ArrayList<>();
+    private List<Filme> filmes = new ArrayList<>();
+    private List<PersonagemAtor> personagens = new ArrayList<>();
 
     public void persisteAtor(Ator ator) {
         atores.add(ator);
@@ -22,6 +34,38 @@ public class FakeDatabase {
 
     public List<Ator> recuperaAtores() {
         return atores;
+    }
+
+    public void persisteDiretor(Diretor diretor) {
+        diretores.add(diretor);
+    }
+
+    public List<Diretor> recuperaDiretores() {
+        return diretores;
+    }
+
+    public void persisteEstudio(Estudio estudio) {
+        estudios.add(estudio);
+    }
+
+    public List<Estudio> recuperaEstudios() {
+        return estudios;
+    }
+
+    public void persisteFilme(Filme filme) {
+        filmes.add(filme);
+    }
+
+    public List<Filme> recuperaFilmes() {
+        return filmes;
+    }
+
+    public void persistePersonagem(PersonagemAtor personagemAtor) {
+        personagens.add(personagemAtor);
+    }
+
+    public List<PersonagemAtor> recuperaPersonagens() {
+        return personagens;
     }
 
     public List<AtorEmAtividade> filtraAtoresEmAtividade(Optional<String> filtroNome) {
@@ -40,51 +84,41 @@ public class FakeDatabase {
         }
     }
 
-    public Ator consultarAtor(Integer id) throws AtorException {
+    public Ator consultarAtor(Integer id) throws Exception {
 
         if (id == null) {
-            throw new AtorException("Campo obrigatório não informado. Favor informar o campo ID.");
+            throw new CampoNaoInformadoException("id");
         }
 
         return atores.stream().filter(x -> x.getId().equals(id)).findAny().
-                orElseThrow(() -> new AtorException
-                        ("Nenhum ator encontrado com o parâmetro id=" + id + ", favor verifique os parâmetros informados."));
+                orElseThrow(() -> new ConsultarPeloIdException("ator", id));
     }
 
-    public List<Ator> consultarAtores() throws AtorException {
+    public List<Ator> consultarAtores() throws Exception {
 
         if (atores.isEmpty()) {
-            throw new AtorException("Nenhum ator cadastrado, favor cadastar atores.");
+            throw new ListaVaziaException("ator", "atores");
         }
 
         return atores;
     }
 
-    public void persisteDiretor(Diretor diretor) {
-        diretores.add(diretor);
-    }
-
-    public List<Diretor> recuperaDiretores() {
-        return diretores;
-    }
-
-    public List<Diretor> listarDiretores(String filtroNome) throws AtorException {
+    public List<Diretor> listarDiretores(String filtroNome) throws Exception {
 
         if (diretores.isEmpty()) {
-            throw new AtorException("Nenhum diretor cadastrado, favor cadastar atores.");
+            throw new ListaVaziaException("diretor", "diretores");
         }
 
         return diretores;
     }
 
-    public Diretor consultarDiretor(Integer id) throws AtorException {
+    public Diretor consultarDiretor(Integer id) throws Exception {
 
         if (id == null) {
-            throw new AtorException("Campo obrigatório não informado. Favor informar o campo ID.");
+            throw new CampoNaoInformadoException("id");
         }
 
         return diretores.stream().filter(x -> x.getId().equals(id)).findAny().
-                orElseThrow(() -> new AtorException
-                        ("Nenhum diretor encontrado com o parâmetro id=" + id + ", favor verifique os parâmetros informados."));
+                orElseThrow(() -> new ConsultarPeloIdException("diretor", id));
     }
 }
