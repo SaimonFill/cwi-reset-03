@@ -35,11 +35,17 @@ public class AtorController {
         return atorService.listarAtoresEmAtividade(java.util.Optional.of(""));
     }
 
-    //Resolver erro: Não encontra ator pelo nome
+    //Resolver erro: Não reconhece id null
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Ator consultarAtor(@PathVariable Integer id) throws Exception {
         return atorService.consultarAtor(id);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<Ator> consultarAtores() throws Exception {
+        return atorService.consultarAtores();
     }
 
     //demais métodos

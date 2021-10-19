@@ -68,15 +68,6 @@ public class FakeDatabase {
         return personagens;
     }
 
-    public List<Ator> consultarAtores() throws Exception {
-
-        if (atores.isEmpty()) {
-            throw new ListaVaziaException("ator", "atores");
-        }
-
-        return atores;
-    }
-
     public List<Diretor> listarDiretores(String filtroNome) throws Exception {
 
         if (diretores.isEmpty()) {

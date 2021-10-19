@@ -152,4 +152,15 @@ public class AtorService {
                 orElseThrow(() -> new ConsultarPeloIdException("ator", id));
     }
 
+    public List<Ator> consultarAtores() throws Exception {
+
+        List<Ator> atores = fakeDatabase.recuperaAtores();
+
+        if (atores.isEmpty()) {
+            throw new ListaVaziaException("ator", "atores");
+        }
+
+        return atores;
+    }
+
 }
