@@ -8,8 +8,10 @@ import br.com.cwi.reset.saimonfill.request.AtorRequest;
 import br.com.cwi.reset.saimonfill.response.AtorEmAtividade;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class AtorService {
 
@@ -118,17 +120,36 @@ public class AtorService {
 
         List<Ator> atores = fakeDatabase.recuperaAtores();
         StatusCarreira filtroCarreira = StatusCarreira.EM_ATIVIDADE;
-        List<AtorEmAtividade> atorEmAtividade = fakeDatabase.filtraAtoresEmAtividade(filtroNome);
 
         if (atores.isEmpty()) {
             throw new ListaVaziaException("ator", "atores");
         }
-        if (atorEmAtividade.contains(filtroCarreira)) {
-            throw new FiltroNomeNaoEncontrado("ator", filtroNome);
+        if (filtroNome.equals(Optional.of(""))) {
+            return atores.stream().filter(x -> x.getStatusCarreira().equals(filtroCarreira))
+                    .map(a -> new AtorEmAtividade(a.getId(), a.getNome(), a.getDataNascimento()))
+                    .collect(Collectors.toList());
+        } else {
+            return atores.stream().filter(x -> filtroNome.isPresent() ? x.getNome().equals(filtroNome.get()) : true)
+                    .filter(a -> a.getStatusCarreira().equals(filtroCarreira))
+                    .map(a -> new AtorEmAtividade(a.getId(), a.getNome(), a.getDataNascimento()))
+                    .collect(Collectors.toList());
         }
 
-        return atorEmAtividade;
+//        if (atores.contains(filtroCarreira)) {
+//            throw new FiltroNomeNaoEncontrado("ator", filtroNome);
+//        }
     }
 
-    // Demais métodos da classe
+    public Ator consultarAtor(Integer id) throws Exception {
+
+        List<Ator> atores = fakeDatabase.recuperaAtores();
+
+        if (id == null) {
+            throw new CampoNaoInformadoException("id");
+        }
+
+        return atores.stream().filter(x -> x.getId().equals(id)).findAny().
+                orElseThrow(() -> new ConsultarPeloIdException("ator", id));
+    }
+
 }
