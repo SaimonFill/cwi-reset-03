@@ -68,22 +68,4 @@ public class FakeDatabase {
         return personagens;
     }
 
-    public List<Diretor> listarDiretores(String filtroNome) throws Exception {
-
-        if (diretores.isEmpty()) {
-            throw new ListaVaziaException("diretor", "diretores");
-        }
-
-        return diretores;
-    }
-
-    public Diretor consultarDiretor(Integer id) throws Exception {
-
-        if (id == null) {
-            throw new CampoNaoInformadoException("id");
-        }
-
-        return diretores.stream().filter(x -> x.getId().equals(id)).findAny().
-                orElseThrow(() -> new ConsultarPeloIdException("diretor", id));
-    }
 }

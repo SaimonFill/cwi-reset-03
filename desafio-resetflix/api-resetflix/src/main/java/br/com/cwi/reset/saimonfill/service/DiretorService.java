@@ -7,6 +7,7 @@ import br.com.cwi.reset.saimonfill.request.DiretorRequest;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class DiretorService {
 
@@ -106,5 +107,27 @@ public class DiretorService {
         }
     }
 
-    //...
+    public List<Diretor> listarDiretores(Optional<String> filtroNome) throws Exception {
+
+        List<Diretor> diretores = fakeDatabase.recuperaDiretores();
+
+        if (diretores.isEmpty()) {
+            throw new ListaVaziaException("diretor", "diretores");
+        }
+
+        return diretores;
+    }
+
+    public Diretor consultarDiretor(Integer id) throws Exception {
+
+        List<Diretor> diretores = fakeDatabase.recuperaDiretores();
+
+        if (id == null) {
+            throw new CampoNaoInformadoException("id");
+        }
+
+        return diretores.stream().filter(x -> x.getId().equals(id)).findAny().
+                orElseThrow(() -> new ConsultarPeloIdException("diretor", id));
+    }
+
 }
