@@ -9,7 +9,7 @@ public class AtorRequest {
     private String nome;
     private LocalDate dataNascimento;
     private StatusCarreira statusCarreira;
-    private int anoInicioAtividade;
+    private Integer anoInicioAtividade;
 
     public AtorRequest(String nome, LocalDate dataNascimento, StatusCarreira statusCarreira, int anoInicioAtividade) {
         this.nome = nome;
@@ -32,5 +32,21 @@ public class AtorRequest {
 
     public Integer getAnoInicioAtividade() {
         return anoInicioAtividade;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public void setStatusCarreira(StatusCarreira statusCarreira) {
+        this.statusCarreira = statusCarreira;
+    }
+
+    public void setAnoInicioAtividade(int anoInicioAtividade) {
+        this.anoInicioAtividade = anoInicioAtividade;
     }
 }

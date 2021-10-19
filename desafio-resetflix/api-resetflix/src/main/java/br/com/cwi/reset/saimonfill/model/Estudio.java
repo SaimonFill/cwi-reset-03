@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Estudio {
 
-    private Integer id;
+    private Integer id = 0;
     private String nome;
     private String descricao;
     private LocalDate dataCriacao;
@@ -22,7 +22,7 @@ public class Estudio {
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id += id;
     }
 
     public String getNome() {

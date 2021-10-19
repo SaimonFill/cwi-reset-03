@@ -22,7 +22,6 @@ public class AtorService {
         this.fakeDatabase = fakeDatabase;
     }
 
-    //Confirmar se este método está correto
     public void criarAtor(AtorRequest atorRequest) throws Exception {
 
         verificaCamposObrigatorios(atorRequest);
