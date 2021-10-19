@@ -26,5 +26,15 @@ public class DiretorRequest {
         return anoInicioAtividade;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public void setAnoInicioAtividade(Integer anoInicioAtividade) {
+        this.anoInicioAtividade = anoInicioAtividade;
+    }
 }

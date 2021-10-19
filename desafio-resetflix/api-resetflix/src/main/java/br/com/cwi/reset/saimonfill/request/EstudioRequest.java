@@ -1,28 +1,21 @@
-package br.com.cwi.reset.saimonfill.model;
+package br.com.cwi.reset.saimonfill.request;
+
+import br.com.cwi.reset.saimonfill.model.StatusAtividade;
 
 import java.time.LocalDate;
 
-public class Estudio {
+public class EstudioRequest {
 
-    private Integer id;
     private String nome;
     private String descricao;
     private LocalDate dataCriacao;
     private StatusAtividade statusAtividade;
 
-    public Estudio(String nome, String descricao, LocalDate dataCriacao, StatusAtividade statusAtividade) {
+    public EstudioRequest(String nome, String descricao, LocalDate dataCriacao, StatusAtividade statusAtividade) {
         this.nome = nome;
         this.descricao = descricao;
         this.dataCriacao = dataCriacao;
         this.statusAtividade = statusAtividade;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -31,6 +24,14 @@ public class Estudio {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public LocalDate getDataCriacao() {
@@ -47,13 +48,5 @@ public class Estudio {
 
     public void setStatusAtividade(StatusAtividade statusAtividade) {
         this.statusAtividade = statusAtividade;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 }
