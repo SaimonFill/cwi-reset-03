@@ -8,22 +8,20 @@ public class Filme {
     private String nome;
     private Integer anoLancamento;
     private String capaFilme;
-    private Genero genero;
-    private Diretor diretor;
-    private Estudio estudio;
+    private List<Genero> genero;
+    private Diretor idDiretor;
+    private Estudio idEstudio;
     private List<PersonagemAtor> personagens;
-    private String resumo;
 
-    public Filme(Integer id, String nome, Integer anoLancamento, String capaFilme, Genero genero, Diretor diretor, Estudio estudio, List<PersonagemAtor> personagens, String resumo) {
+    public Filme(Integer id, String nome, Integer anoLancamento, String capaFilme, List<Genero> genero, Diretor idDiretor, Estudio idEstudio, List<PersonagemAtor> personagens) {
         this.id = id;
         this.nome = nome;
         this.anoLancamento = anoLancamento;
         this.capaFilme = capaFilme;
         this.genero = genero;
-        this.diretor = diretor;
-        this.estudio = estudio;
+        this.idDiretor = idDiretor;
+        this.idEstudio = idEstudio;
         this.personagens = personagens;
-        this.resumo = resumo;
     }
 
     public Integer getId() {
@@ -31,7 +29,7 @@ public class Filme {
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id += id;
     }
 
     public String getNome() {
@@ -58,28 +56,28 @@ public class Filme {
         this.capaFilme = capaFilme;
     }
 
-    public Genero getGenero() {
+    public List<Genero> getGenero() {
         return genero;
     }
 
-    public void setGenero(Genero genero) {
+    public void setGenero(List<Genero> genero) {
         this.genero = genero;
     }
 
-    public Diretor getDiretor() {
-        return diretor;
+    public Diretor getIdDiretor() {
+        return idDiretor;
     }
 
-    public void setDiretor(Diretor diretor) {
-        this.diretor = diretor;
+    public void setIdDiretor(Diretor idDiretor) {
+        this.idDiretor = idDiretor;
     }
 
-    public Estudio getEstudio() {
-        return estudio;
+    public Estudio getIdEstudio() {
+        return idEstudio;
     }
 
-    public void setEstudio(Estudio estudio) {
-        this.estudio = estudio;
+    public void setIdEstudio(Estudio idEstudio) {
+        this.idEstudio = idEstudio;
     }
 
     public List<PersonagemAtor> getPersonagens() {
@@ -88,13 +86,5 @@ public class Filme {
 
     public void setPersonagens(List<PersonagemAtor> personagens) {
         this.personagens = personagens;
-    }
-
-    public String getResumo() {
-        return resumo;
-    }
-
-    public void setResumo(String resumo) {
-        this.resumo = resumo;
     }
 }
