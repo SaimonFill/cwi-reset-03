@@ -88,6 +88,18 @@ public class EstudioService {
         return estudios;
     }
 
+    public Estudio consultarEstudio(Integer id) throws Exception {
+
+        List<Estudio> estudios = fakeDatabase.recuperaEstudios();
+
+        if (id == null) {
+            throw new CampoNaoInformadoException("id");
+        }
+
+        return estudios.stream().filter(x -> x.getId().equals(id)).findAny().
+                orElseThrow(() -> new ConsultarPeloIdException("estudio", id));
+    }
+
     public void setId() {
         List<Estudio> listaId = fakeDatabase.recuperaEstudios();
 

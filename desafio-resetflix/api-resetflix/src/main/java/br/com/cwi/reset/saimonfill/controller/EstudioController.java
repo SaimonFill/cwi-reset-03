@@ -8,6 +8,7 @@ import br.com.cwi.reset.saimonfill.service.EstudioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class EstudioController {
 
     private EstudioService estudioService;
+    private static List<Estudio> estudios = new ArrayList<>();
 
     public EstudioController() {
         this.estudioService = new EstudioService(FakeDatabase.getInstance());
@@ -32,5 +34,12 @@ public class EstudioController {
     @ResponseStatus(HttpStatus.OK)
     public List<Estudio> consultarEstudios(@PathVariable Optional<String> filtroNome) throws Exception {
        return this.estudioService.consultarEstudios(Optional.of(""));
+    }
+
+    //Resolver erro: Não reconhece id null
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Estudio consultarEstudio(@PathVariable Integer id) throws Exception {
+        return this.estudioService.consultarEstudio(id);
     }
 }
