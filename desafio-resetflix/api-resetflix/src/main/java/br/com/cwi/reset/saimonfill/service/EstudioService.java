@@ -27,14 +27,17 @@ public class EstudioService {
         verificaMesmoNome(estudioRequest);
         verificaDataCriacao(estudioRequest);
 
+        List<Estudio> estudioSize = fakeDatabase.recuperaEstudios();
+        Integer id = estudioSize.size() + 1;
+
         estudio = new Estudio(
+                id,
                 estudioRequest.getNome(),
                 estudioRequest.getDescricao(),
                 estudioRequest.getDataCriacao(),
                 estudioRequest.getStatusAtividade()
         );
 
-        setId();
         fakeDatabase.persisteEstudio(estudio);
     }
 
@@ -98,18 +101,5 @@ public class EstudioService {
 
         return estudios.stream().filter(x -> x.getId().equals(id)).findAny().
                 orElseThrow(() -> new ConsultarPeloIdException("estudio", id));
-    }
-
-    public void setId() {
-        List<Estudio> listaId = fakeDatabase.recuperaEstudios();
-
-        Integer id = 1;
-        estudio.setId(id);
-
-        for (int i = 0; i < listaId.size(); i++) {
-            if (estudio.getId() == listaId.get(i).getId()) {
-                estudio.setId(id);
-            }
-        }
     }
 }

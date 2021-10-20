@@ -4,13 +4,14 @@ import java.time.LocalDate;
 
 public class Estudio {
 
-    private Integer id = 0;
+    private Integer id;
     private String nome;
     private String descricao;
     private LocalDate dataCriacao;
     private StatusAtividade statusAtividade;
 
-    public Estudio(String nome, String descricao, LocalDate dataCriacao, StatusAtividade statusAtividade) {
+    public Estudio(Integer id, String nome, String descricao, LocalDate dataCriacao, StatusAtividade statusAtividade) {
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.dataCriacao = dataCriacao;
@@ -22,7 +23,7 @@ public class Estudio {
     }
 
     public void setId(Integer id) {
-        this.id += id;
+        this.id = id;
     }
 
     public String getNome() {

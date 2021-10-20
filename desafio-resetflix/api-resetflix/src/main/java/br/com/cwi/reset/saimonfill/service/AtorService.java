@@ -30,14 +30,17 @@ public class AtorService {
         verificaDataNascimento(atorRequest);
         verificaAnoInicioAtividade(atorRequest);
 
+        List<Ator> atorSize = fakeDatabase.recuperaAtores();
+        Integer id = atorSize.size() + 1;
+
         ator = new Ator(
+                id,
                 atorRequest.getNome(),
                 atorRequest.getDataNascimento(),
                 atorRequest.getStatusCarreira(),
                 atorRequest.getAnoInicioAtividade()
         );
 
-        setId();
         fakeDatabase.persisteAtor(ator);
     }
 
@@ -102,19 +105,6 @@ public class AtorService {
         }
     }
 
-    public void setId() {
-        List<Ator> listaId = fakeDatabase.recuperaAtores();
-
-        Integer id = 1;
-        ator.setId(id);
-
-        for (int i = 0; i < listaId.size(); i++) {
-            if (ator.getId() == listaId.get(i).getId()) {
-                ator.setId(id);
-            }
-        }
-    }
-
     public List<AtorEmAtividade> listarAtoresEmAtividade(Optional<String> filtroNome) throws Exception {
 
         List<Ator> atores = fakeDatabase.recuperaAtores();
@@ -133,10 +123,6 @@ public class AtorService {
                     .map(a -> new AtorEmAtividade(a.getId(), a.getNome(), a.getDataNascimento()))
                     .collect(Collectors.toList());
         }
-
-//        if (atores.contains(filtroCarreira)) {
-//            throw new FiltroNomeNaoEncontrado("ator", filtroNome);
-//        }
     }
 
     public Ator consultarAtor(Integer id) throws Exception {

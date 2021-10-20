@@ -26,13 +26,16 @@ public class DiretorService {
         verificaDataNascimento(diretorRequest);
         verificaAnoInicioAtividade(diretorRequest);
 
+        List<Diretor> diretorSize = fakeDatabase.recuperaDiretores();
+        Integer id = diretorSize.size() + 1;
+
         diretor = new Diretor(
+                id,
                 diretorRequest.getNome(),
                 diretorRequest.getDataNascimento(),
                 diretorRequest.getAnoInicioAtividade()
         );
 
-        setId();
         fakeDatabase.persisteDiretor(diretor);
     }
 
@@ -91,19 +94,6 @@ public class DiretorService {
 
         if (comparaDatas) {
             throw new AnoInicioInvalidoException("diretor");
-        }
-    }
-
-    public void setId() {
-        List<Diretor> listaId = fakeDatabase.recuperaDiretores();
-
-        Integer id = 1;
-        diretor.setId(id);
-
-        for (int i = 0; i < listaId.size(); i++) {
-            if (diretor.getId() == listaId.get(i).getId()) {
-                diretor.setId(id);
-            }
         }
     }
 
