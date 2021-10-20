@@ -9,7 +9,9 @@ import br.com.cwi.reset.saimonfill.request.AtorRequest;
 import br.com.cwi.reset.saimonfill.request.EstudioRequest;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 public class EstudioService {
@@ -80,15 +82,30 @@ public class EstudioService {
         }
     }
 
-    public List<Estudio> consultarEstudios(Optional<String> filtroNome) throws Exception {
+    public List<Estudio> consultarEstudios(String filtroNome) throws Exception {
 
         List<Estudio> estudios = fakeDatabase.recuperaEstudios();
+        List<Estudio> estudioEncontrado = new ArrayList<>();
 
         if (estudios.isEmpty()) {
-            throw new ListaVaziaException("estudio", "estudios");
+            throw new ListaVaziaException("diretor", "diretores");
         }
 
-        return estudios;
+        if (filtroNome != null) {
+            for (int i = 0; i < estudios.size(); i++) {
+
+                boolean containsFiltro = estudios.get(i).getNome().toLowerCase(Locale.ROOT).contains(filtroNome.toLowerCase(Locale.ROOT));
+
+                if (containsFiltro == true) {
+                    estudioEncontrado.add(estudios.get(i));
+                }
+            }
+        }
+        else {
+            estudioEncontrado.addAll(estudios);
+        }
+
+        return estudioEncontrado;
     }
 
     public Estudio consultarEstudio(Integer id) throws Exception {

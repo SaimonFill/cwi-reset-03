@@ -26,11 +26,10 @@ public class AtorController {
         this.atorService.criarAtor(atorRequest);
     }
 
-    //Resolver erro: Não encontra ator pelo nome
-    @GetMapping("/em_atividade/{filtroNome}")
+    @GetMapping("/em_atividade")
     @ResponseStatus(HttpStatus.OK)
-    public List<AtorEmAtividade> listarAtoresEmAtividade(@PathVariable String filtroNome) throws Exception {
-        return atorService.listarAtoresEmAtividade(java.util.Optional.of(""));
+    public List<AtorEmAtividade> listarAtoresEmAtividade(@RequestParam String filtroNome) throws Exception {
+        return atorService.listarAtoresEmAtividade(filtroNome);
     }
 
     //Resolver erro: Não reconhece id null

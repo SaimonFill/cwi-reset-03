@@ -8,9 +8,7 @@ import br.com.cwi.reset.saimonfill.request.AtorRequest;
 import br.com.cwi.reset.saimonfill.response.AtorEmAtividade;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AtorService {
@@ -105,24 +103,49 @@ public class AtorService {
         }
     }
 
-    public List<AtorEmAtividade> listarAtoresEmAtividade(Optional<String> filtroNome) throws Exception {
+    public List<AtorEmAtividade> listarAtoresEmAtividade(String filtroNome) throws Exception {
 
         List<Ator> atores = fakeDatabase.recuperaAtores();
         StatusCarreira filtroCarreira = StatusCarreira.EM_ATIVIDADE;
+        List<AtorEmAtividade> atorEmAtividade = new ArrayList<>();
 
         if (atores.isEmpty()) {
             throw new ListaVaziaException("ator", "atores");
         }
-        if (filtroNome.equals(Optional.of(""))) {
-            return atores.stream().filter(x -> x.getStatusCarreira().equals(filtroCarreira))
-                    .map(a -> new AtorEmAtividade(a.getId(), a.getNome(), a.getDataNascimento()))
-                    .collect(Collectors.toList());
+        else if (filtroNome != null) {
+            for (int i = 0; i < atores.size(); i++) {
+
+                boolean containsFiltro = atores.get(i).getNome().toLowerCase(Locale.ROOT).contains(filtroNome.toLowerCase(Locale.ROOT));
+                boolean filtroAtividade = atores.get(i).getStatusCarreira().equals(filtroCarreira);
+
+                if (containsFiltro == true && filtroAtividade == true) {
+                    atorEmAtividade.add(new AtorEmAtividade(
+                            atores.get(i).getId(),
+                            atores.get(i).getNome(),
+                            atores.get(i).getDataNascimento())
+                    );
+                }
+            }
         } else {
-            return atores.stream().filter(x -> filtroNome.isPresent() ? x.getNome().equals(filtroNome.get()) : true)
-                    .filter(a -> a.getStatusCarreira().equals(filtroCarreira))
-                    .map(a -> new AtorEmAtividade(a.getId(), a.getNome(), a.getDataNascimento()))
-                    .collect(Collectors.toList());
+            for (int i = 0; i < atores.size(); i++) {
+
+                boolean filtroAtividade = atores.get(i).getStatusCarreira().equals(filtroCarreira);
+
+                if (filtroAtividade == true) {
+                    atorEmAtividade.add(new AtorEmAtividade(
+                            atores.get(i).getId(),
+                            atores.get(i).getNome(),
+                            atores.get(i).getDataNascimento())
+                    );
+                }
+            }
         }
+
+        if (atorEmAtividade.isEmpty()) {
+            throw new FiltroNomeNaoEncontrado("Ator", filtroNome);
+        }
+
+        return atorEmAtividade;
     }
 
     public Ator consultarAtor(Integer id) throws Exception {

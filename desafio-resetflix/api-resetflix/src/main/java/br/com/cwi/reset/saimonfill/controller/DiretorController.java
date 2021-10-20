@@ -27,11 +27,10 @@ public class DiretorController {
         this.diretorService.cadastrarDiretor(diretorRequest);
     }
 
-    //Resolver erro: Não encontra diretor pelo nome
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Diretor> listarDiretores(@PathVariable Optional<String> filtroNome) throws Exception {
-        return diretorService.listarDiretores(Optional.of(""));
+    public List<Diretor> listarDiretores(@RequestParam String filtroNome) throws Exception {
+        return diretorService.listarDiretores(filtroNome);
     }
 
     //Resolver erro: Não reconhece id null

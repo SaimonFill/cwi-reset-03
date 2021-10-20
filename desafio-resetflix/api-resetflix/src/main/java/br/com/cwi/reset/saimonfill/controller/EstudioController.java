@@ -29,11 +29,10 @@ public class EstudioController {
         this.estudioService.criarEstudio(estudioRequest);
     }
 
-    //Resolver erro: Não encontra diretor pelo nome
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Estudio> consultarEstudios(@PathVariable Optional<String> filtroNome) throws Exception {
-       return this.estudioService.consultarEstudios(Optional.of(""));
+    public List<Estudio> consultarEstudios(@RequestParam String filtroNome) throws Exception {
+       return this.estudioService.consultarEstudios(filtroNome);
     }
 
     //Resolver erro: Não reconhece id null
