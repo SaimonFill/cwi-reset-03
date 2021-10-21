@@ -6,23 +6,21 @@ import br.com.cwi.reset.saimonfill.service.FilmeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+@RestController
+@RequestMapping("/filmes")
 public class FilmeController {
 
-    @RestController
-    @RequestMapping("/filmes")
-    public class FilmeController {
+    private FilmeService filmeService;
 
-        private FilmeService filmeService;
+    public FilmeController() {
+        this.filmeService = new FilmeService((FakeDatabase.getInstance()));
+    }
 
-        public FilmeController() {
-            this.filmeService = new FilmeService((FakeDatabase.getInstance()));
-        }
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void criarFilme(@RequestBody FilmeRequest filmeRequest) throws Exception {
+        this.filmeService.criarFilme(filmeRequest);
 
-        @PostMapping
-        @ResponseStatus(HttpStatus.CREATED)
-        public void criarFilme(@RequestBody FilmeRequest filmeRequest) throws Exception {
-            this.filmeService.criarFilme(filmeRequest);
-
-        }
     }
 }
+

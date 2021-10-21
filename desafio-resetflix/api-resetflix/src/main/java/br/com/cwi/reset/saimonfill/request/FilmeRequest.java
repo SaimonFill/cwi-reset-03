@@ -12,7 +12,6 @@ public class FilmeRequest {
     private List<Genero> generos;
     private Integer idDiretor;
     private Integer idEstudio;
-    private String resumo;
     private List<PersonagemRequest> personagens;
 
     public FilmeRequest(String nome, Integer anoLancamento, String capaFilme, List<Genero> generos, Integer idDiretor, Integer idEstudio, String resumo, List<PersonagemRequest> personagens) {
@@ -22,7 +21,6 @@ public class FilmeRequest {
         this.generos = generos;
         this.idDiretor = idDiretor;
         this.idEstudio = idEstudio;
-        this.resumo = resumo;
         this.personagens = personagens;
     }
 
@@ -72,14 +70,6 @@ public class FilmeRequest {
 
     public void setIdEstudio(Integer idEstudio) {
         this.idEstudio = idEstudio;
-    }
-
-    public String getResumo() {
-        return resumo;
-    }
-
-    public void setResumo(String resumo) {
-        this.resumo = resumo;
     }
 
     public List<PersonagemRequest> getPersonagens() {

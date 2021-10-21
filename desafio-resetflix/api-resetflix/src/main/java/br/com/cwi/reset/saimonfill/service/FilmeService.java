@@ -29,10 +29,11 @@ public class FilmeService {
         Estudio idEstudio = estudioService.consultarEstudio(filmeRequest.getIdEstudio());
         List<PersonagemAtor> personagens = personagemService.criarPersonagem(filmeRequest.getPersonagens());
 
-        Integer idGerado = fakeDatabase.recuperaFilmes().size() + 1;
+        List<Filme> idFilme = fakeDatabase.recuperaFilmes();
+        Integer id = idFilme.size() + 1;
 
         Filme filme = new Filme(
-                idGerado,
+                id,
                 filmeRequest.getNome(),
                 filmeRequest.getAnoLancamento(),
                 filmeRequest.getCapaFilme(),

@@ -25,12 +25,14 @@ public class PersonagemService {
 
         for (PersonagemRequest personagemRequests : personagens) {
 
-            Integer idPersonagem = fakeDatabase.recuperaPersonagens().size() + 1;
+            List<PersonagemAtor> idPersonagem = fakeDatabase.recuperaPersonagens();
+            Integer id = idPersonagem.size() + 1;
+
             Integer idAtor = personagemRequests.getIdAtor();
             Ator ator = atorService.consultarAtor(idAtor);
 
             PersonagemAtor personagemAtor = new PersonagemAtor(
-                    idPersonagem,
+                    id,
                     ator,
                     personagemRequests.getNomePersonagem(),
                     personagemRequests.getDescricaoPersonagem(),
