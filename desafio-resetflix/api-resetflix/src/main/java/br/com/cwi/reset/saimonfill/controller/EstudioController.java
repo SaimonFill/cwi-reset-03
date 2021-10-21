@@ -2,6 +2,7 @@ package br.com.cwi.reset.saimonfill.controller;
 
 
 import br.com.cwi.reset.saimonfill.FakeDatabase;
+import br.com.cwi.reset.saimonfill.exception.CampoNaoInformadoException;
 import br.com.cwi.reset.saimonfill.model.Estudio;
 import br.com.cwi.reset.saimonfill.request.EstudioRequest;
 import br.com.cwi.reset.saimonfill.service.EstudioService;
@@ -39,6 +40,10 @@ public class EstudioController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Estudio consultarEstudio(@PathVariable Integer id) throws Exception {
+
+        if (id == null) {
+            throw new CampoNaoInformadoException("id");
+        }
         return this.estudioService.consultarEstudio(id);
     }
 }
