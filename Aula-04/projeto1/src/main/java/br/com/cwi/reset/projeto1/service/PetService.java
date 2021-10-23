@@ -5,7 +5,6 @@ import br.com.cwi.reset.projeto1.exception.FilmeNaoExistenteException;
 import br.com.cwi.reset.projeto1.exception.PetJaExistenteException;
 import br.com.cwi.reset.projeto1.exception.PetNaoExistenteException;
 import br.com.cwi.reset.projeto1.repository.PetRepository;
-import br.com.cwi.reset.projeto1.repository.PetRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +40,7 @@ public class PetService {
         if (petExistente == null) {
             throw new PetNaoExistenteException("Pet com o nome " + pet.getNome() + " não existe");
         }
-        petRepository.update(pet);
+        petRepository.save(pet);
     }
 
     public void deletarPet(String nomePet) throws FilmeNaoExistenteException {
