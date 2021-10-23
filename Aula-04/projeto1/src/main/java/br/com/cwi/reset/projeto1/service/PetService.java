@@ -1,16 +1,21 @@
 package br.com.cwi.reset.projeto1.service;
 
 import br.com.cwi.reset.projeto1.domain.Pet;
-import br.com.cwi.reset.projeto1.exception.FilmeJaExistenteException;
 import br.com.cwi.reset.projeto1.exception.FilmeNaoExistenteException;
+import br.com.cwi.reset.projeto1.exception.PetJaExistenteException;
 import br.com.cwi.reset.projeto1.exception.PetNaoExistenteException;
 import br.com.cwi.reset.projeto1.repository.PetRepository;
+import br.com.cwi.reset.projeto1.repository.PetRepositoryImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PetService {
 
-    private PetRepository petRepository = new PetRepository();
+    @Autowired
+    private PetRepository petRepository;
 
     public List<Pet> listarTodos() {
         return petRepository.findAll();
@@ -20,11 +25,11 @@ public class PetService {
         return petRepository.findByNome(nome);
     }
 
-    public Pet cadastrarPet(Pet pet) throws FilmeJaExistenteException {
+    public Pet cadastrarPet(Pet pet) throws PetJaExistenteException {
         Pet petExistente = petRepository.findByNome(pet.getNome());
 
         if (petExistente != null) {
-            throw new FilmeJaExistenteException("Pet com o nome " + pet.getNome() + " já existe");
+            throw new PetJaExistenteException("Pet com o nome " + pet.getNome() + " já existe");
         }
         petRepository.save(pet);
         return pet;

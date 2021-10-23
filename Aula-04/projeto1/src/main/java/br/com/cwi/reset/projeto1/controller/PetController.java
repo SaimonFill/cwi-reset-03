@@ -7,6 +7,7 @@ import br.com.cwi.reset.projeto1.exception.FilmeNaoExistenteException;
 import br.com.cwi.reset.projeto1.exception.PetJaExistenteException;
 import br.com.cwi.reset.projeto1.exception.PetNaoExistenteException;
 import br.com.cwi.reset.projeto1.service.PetService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +16,8 @@ import java.util.List;
 @RequestMapping("/pet")
 public class PetController {
 
-    private PetService petService = new PetService();
+    @Autowired
+    private PetService petService;
 
     @GetMapping
     public List<Pet> getPet() {
@@ -28,7 +30,7 @@ public class PetController {
     }
 
     @PostMapping
-    public Pet cadastrarPet(@RequestBody Pet pet) throws FilmeJaExistenteException {
+    public Pet cadastrarPet(@RequestBody Pet pet) throws PetJaExistenteException {
         return petService.cadastrarPet(pet);
     }
 
