@@ -9,6 +9,7 @@ import br.com.cwi.reset.saimonfill.service.EstudioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,10 +37,9 @@ public class EstudioController {
        return this.estudioService.consultarEstudios(filtroNome);
     }
 
-    //Resolver erro: Não reconhece id null
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Estudio consultarEstudio(@PathVariable Integer id) throws Exception {
+    public Estudio consultarEstudio(@PathParam("/{id}") Integer id) throws Exception {
 
         if (id == null) {
             throw new CampoNaoInformadoException("id");

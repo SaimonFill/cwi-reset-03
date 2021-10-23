@@ -115,8 +115,15 @@ public class EstudioService {
         if (id == null) {
             throw new CampoNaoInformadoException("id");
         }
-
-        return estudios.stream().filter(x -> x.getId().equals(id)).findAny().
-                orElseThrow(() -> new ConsultarPeloIdException("estudio", id));
+        else if (!estudios.isEmpty()) {
+            for (Estudio estudio : estudios) {
+                if (estudio.getId() == id) {
+                    return estudio;
+                }
+            }
+        } else {
+            throw new ConsultarPeloIdException("estudio", id);
+        }
+        return null;
     }
 }
