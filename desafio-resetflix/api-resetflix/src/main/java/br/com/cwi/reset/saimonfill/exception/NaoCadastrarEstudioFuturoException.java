@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class NaoCadastrarEstudioFuturoException extends Exception {
-    public NaoCadastrarEstudioFuturoException() {
-        super("Não é possível cadastrar estúdios do futuro.");
+    public NaoCadastrarEstudioFuturoException(String tipo) {
+        super(String.format("Não é possível cadastrar %s não nascidos.", tipo));
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class JaExisteCadastradoException extends Exception{
-    public JaExisteCadastradoException(String tipoProfissao, String nome) {
-        super(String.format("Já existe um %s cadastrado para o nome %s.",tipoProfissao, nome));
+    public JaExisteCadastradoException(String tipo, String parametro) {
+        super(String.format("Já existe um %s cadastrado para o nome %s.", tipo, parametro));
     }
 }

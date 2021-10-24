@@ -6,10 +6,9 @@ import br.com.cwi.reset.saimonfill.model.Ator;
 import br.com.cwi.reset.saimonfill.model.StatusCarreira;
 import br.com.cwi.reset.saimonfill.request.AtorRequest;
 import br.com.cwi.reset.saimonfill.response.AtorEmAtividade;
+import br.com.cwi.reset.saimonfill.validator.BasicInfoRequiredValidator;
 
-import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class AtorService {
 
@@ -22,17 +21,25 @@ public class AtorService {
 
     public void criarAtor(AtorRequest atorRequest) throws Exception {
 
-        verificaCamposObrigatorios(atorRequest);
-        verificaNomeSobrenome(atorRequest);
+        new BasicInfoRequiredValidator().accept(
+                atorRequest.getNome(),
+                atorRequest.getDataNascimento(),
+                atorRequest.getAnoInicioAtividade(),
+                TipoDominioException.ATOR
+        );
+
         verificaMesmoNome(atorRequest);
-        verificaDataNascimento(atorRequest);
-        verificaAnoInicioAtividade(atorRequest);
 
-        List<Ator> atorSize = fakeDatabase.recuperaAtores();
-        Integer id = atorSize.size() + 1;
+        List<Ator> atores = fakeDatabase.recuperaAtores();
+        final Integer idGerado = atores.size() + 1;
 
-        ator = new Ator(
-                id,
+        for (Ator atorCadastrado : atores) {
+            if (atorCadastrado.getNome().equalsIgnoreCase(atorRequest.getNome())) {
+                throw new JaExisteCadastradoException(TipoDominioException.ATOR.getSingular(), atorRequest.getNome());
+            }
+        }
+        final Ator ator = new Ator(
+                idGerado,
                 atorRequest.getNome(),
                 atorRequest.getDataNascimento(),
                 atorRequest.getStatusCarreira(),
@@ -40,43 +47,6 @@ public class AtorService {
         );
 
         fakeDatabase.persisteAtor(ator);
-    }
-
-    public void verificaCamposObrigatorios(AtorRequest atorRequest) throws Exception {
-
-        if (atorRequest.getNome().isEmpty()) {
-            throw new NomeNaoInformadoException();
-        }
-        if (atorRequest.getDataNascimento() == null) {
-            throw new DataNascimentoNaoInformadoException();
-        }
-        if (atorRequest.getStatusCarreira() == null) {
-            throw new StatusCarreiraNaoInformadoException();
-        }
-        if (atorRequest.getAnoInicioAtividade() == null) {
-            throw new AnoInicioAtividadeNaoInformadoException();
-        }
-    }
-
-    public void verificaNomeSobrenome(AtorRequest atorRequest) throws Exception {
-
-        String nome = atorRequest.getNome();
-        String[] arrayNome = nome.split(" ");
-
-        if (arrayNome.length <= 1) {
-            throw new InformarNomeSobrenomeException("ator");
-        }
-    }
-
-    public void verificaDataNascimento(AtorRequest atorRequest) throws Exception {
-
-        LocalDate dataAtual = LocalDate.now();
-        LocalDate dataNascimento = atorRequest.getDataNascimento();
-        boolean comparaDatas = dataNascimento.isAfter(dataAtual);
-
-        if (comparaDatas) {
-            throw new NaoCadastrarNaoNacidosException("atores");
-        }
     }
 
     public void verificaMesmoNome(AtorRequest atorRequest) throws Exception {
@@ -88,18 +58,6 @@ public class AtorService {
             if (listaNomes.get(i).getNome().contains(nomeRequerido)) {
                 throw new JaExisteCadastradoException("ator", nomeRequerido);
             }
-        }
-    }
-
-    public void verificaAnoInicioAtividade(AtorRequest atorRequest) throws Exception {
-
-        LocalDate dataNascimento = atorRequest.getDataNascimento();
-        LocalDate inicioAtividade = LocalDate.ofYearDay(atorRequest.getAnoInicioAtividade(), 1);
-
-        boolean comparaDatas = dataNascimento.isAfter(inicioAtividade);
-
-        if (comparaDatas) {
-            throw new AnoInicioInvalidoException("ator");
         }
     }
 
@@ -142,7 +100,7 @@ public class AtorService {
         }
 
         if (atorEmAtividade.isEmpty()) {
-            throw new FiltroNomeNaoEncontrado("Ator", filtroNome);
+            throw new FiltroNomeNaoEncontradoException("Ator", filtroNome);
         }
 
         return atorEmAtividade;

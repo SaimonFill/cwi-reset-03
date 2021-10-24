@@ -4,6 +4,7 @@ import br.com.cwi.reset.saimonfill.FakeDatabase;
 import br.com.cwi.reset.saimonfill.exception.*;
 import br.com.cwi.reset.saimonfill.model.Diretor;
 import br.com.cwi.reset.saimonfill.request.DiretorRequest;
+import br.com.cwi.reset.saimonfill.validator.BasicInfoRequiredValidator;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,11 +23,14 @@ public class DiretorService {
 
     public void cadastrarDiretor(DiretorRequest diretorRequest) throws Exception {
 
-        verificaCamposObrigatorios(diretorRequest);
+        new BasicInfoRequiredValidator().accept(
+                diretorRequest.getNome(),
+                diretorRequest.getDataNascimento(),
+                diretorRequest.getAnoInicioAtividade(),
+                TipoDominioException.DIRETOR
+        );
+
         verificaNomeSobrenome(diretorRequest);
-        verificaMesmoNome(diretorRequest);
-        verificaDataNascimento(diretorRequest);
-        verificaAnoInicioAtividade(diretorRequest);
 
         List<Diretor> diretorSize = fakeDatabase.recuperaDiretores();
         Integer id = diretorSize.size() + 1;
@@ -41,19 +45,6 @@ public class DiretorService {
         fakeDatabase.persisteDiretor(diretor);
     }
 
-    public void verificaCamposObrigatorios(DiretorRequest diretorRequest) throws Exception {
-
-        if (diretorRequest.getNome().isEmpty()) {
-            throw new NomeNaoInformadoException();
-        }
-        if (diretorRequest.getDataNascimento() == null) {
-            throw new DataNascimentoNaoInformadoException();
-        }
-        if (diretorRequest.getAnoInicioAtividade() == null) {
-            throw new AnoInicioAtividadeNaoInformadoException();
-        }
-    }
-
     public void verificaNomeSobrenome(DiretorRequest diretorRequest) throws Exception {
 
         String nome = diretorRequest.getNome();
@@ -61,41 +52,6 @@ public class DiretorService {
 
         if (arrayNome.length <= 1) {
             throw new InformarNomeSobrenomeException("diretor");
-        }
-    }
-
-    public void verificaDataNascimento(DiretorRequest diretorRequest) throws Exception {
-
-        LocalDate dataAtual = LocalDate.now();
-        LocalDate dataNascimento = diretorRequest.getDataNascimento();
-        boolean comparaDatas = dataNascimento.isAfter(dataAtual);
-
-        if (comparaDatas) {
-            throw new NaoCadastrarNaoNacidosException("diretor");
-        }
-    }
-
-    public void verificaMesmoNome(DiretorRequest diretorRequest) throws Exception {
-
-        List<Diretor> listaNomes = fakeDatabase.recuperaDiretores();
-        String nomeRequerido = diretorRequest.getNome();
-
-        for (int i = 0; i < listaNomes.size(); i++) {
-            if (listaNomes.get(i).getNome().contains(nomeRequerido)) {
-                throw new JaExisteCadastradoException("diretor", nomeRequerido);
-            }
-        }
-    }
-
-    public void verificaAnoInicioAtividade(DiretorRequest diretorRequest) throws Exception {
-
-        LocalDate dataNascimento = diretorRequest.getDataNascimento();
-        LocalDate inicioAtividade = LocalDate.ofYearDay(diretorRequest.getAnoInicioAtividade(), 1);
-
-        boolean comparaDatas = dataNascimento.isAfter(inicioAtividade);
-
-        if (comparaDatas) {
-            throw new AnoInicioInvalidoException("diretor");
         }
     }
 

@@ -7,6 +7,7 @@ import br.com.cwi.reset.saimonfill.model.Diretor;
 import br.com.cwi.reset.saimonfill.model.Estudio;
 import br.com.cwi.reset.saimonfill.request.AtorRequest;
 import br.com.cwi.reset.saimonfill.request.EstudioRequest;
+import br.com.cwi.reset.saimonfill.validator.EstudioRequestCamposObrigatoriosValidator;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,7 +26,8 @@ public class EstudioService {
 
     public void criarEstudio(EstudioRequest estudioRequest) throws Exception {
 
-        verificaCamposObrigatorios(estudioRequest);
+        new EstudioRequestCamposObrigatoriosValidator().accept(estudioRequest);
+
         verificaMesmoNome(estudioRequest);
         verificaDataCriacao(estudioRequest);
 
@@ -41,22 +43,6 @@ public class EstudioService {
         );
 
         fakeDatabase.persisteEstudio(estudio);
-    }
-
-    public void verificaCamposObrigatorios(EstudioRequest estudioRequest) throws Exception {
-
-        if (estudioRequest.getNome().isEmpty()) {
-            throw new NomeNaoInformadoException();
-        }
-        if (estudioRequest.getDescricao().isEmpty()) {
-            throw new DescricaoNaoInformadoException();
-        }
-        if (estudioRequest.getDataCriacao() == null) {
-            throw new DataCriacaoNaoInformadoException();
-        }
-        if (estudioRequest.getStatusAtividade() == null) {
-            throw new StatusAtividadeNaoInformadoException();
-        }
     }
 
     public void verificaMesmoNome(EstudioRequest estudioRequest) throws Exception {
@@ -78,7 +64,7 @@ public class EstudioService {
         boolean comparaDatas = dataCriacao.isAfter(dataAtual);
 
         if (comparaDatas) {
-            throw new NaoCadastrarEstudioFuturoException();
+            throw new NaoCadastrarEstudioFuturoException(TipoDominioException.ESTUDIO.name());
         }
     }
 
