@@ -33,10 +33,8 @@ public class DiretorService {
         verificaNomeSobrenome(diretorRequest);
 
         List<Diretor> diretorSize = fakeDatabase.recuperaDiretores();
-        Integer id = diretorSize.size() + 1;
 
         diretor = new Diretor(
-                id,
                 diretorRequest.getNome(),
                 diretorRequest.getDataNascimento(),
                 diretorRequest.getAnoInicioAtividade()

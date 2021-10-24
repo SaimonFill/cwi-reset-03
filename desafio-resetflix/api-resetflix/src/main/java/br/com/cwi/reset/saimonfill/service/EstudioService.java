@@ -35,7 +35,6 @@ public class EstudioService {
         Integer id = estudioSize.size() + 1;
 
         estudio = new Estudio(
-                id,
                 estudioRequest.getNome(),
                 estudioRequest.getDescricao(),
                 estudioRequest.getDataCriacao(),

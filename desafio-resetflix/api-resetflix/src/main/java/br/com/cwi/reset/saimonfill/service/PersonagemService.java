@@ -29,7 +29,11 @@ public class PersonagemService {
         final Integer idGerado = fakeDatabase.recuperaPersonagens().size() + 1;
         final Ator ator = atorService.consultarAtor(personagemRequest.getIdAtor());
 
-        final PersonagemAtor personagemAtor = new PersonagemAtor(idGerado, ator, personagemRequest.getNomePersonagem(), personagemRequest.getDescricaoPersonagem(), personagemRequest.getTipoAtuacao());
+        final PersonagemAtor personagemAtor = new PersonagemAtor(
+                ator,
+                personagemRequest.getNomePersonagem(),
+                personagemRequest.getDescricaoPersonagem(),
+                personagemRequest.getTipoAtuacao());
 
         fakeDatabase.persistePersonagem(personagemAtor);
 

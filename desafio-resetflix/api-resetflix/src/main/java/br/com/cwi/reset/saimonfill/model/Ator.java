@@ -1,33 +1,37 @@
 package br.com.cwi.reset.saimonfill.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
+@Entity
 public class Ator {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private LocalDate dataNascimento;
+    @Enumerated(EnumType.STRING)
     private StatusCarreira statusCarreira;
     private Integer anoInicioAtividade;
 
-    public Ator(Integer id, String nome, LocalDate dataNascimento, StatusCarreira statusCarreira, Integer anoInicioAtividade) {
-        this.id = id;
+    public Ator() {
+    }
+
+    public Ator(String nome, LocalDate dataNascimento, StatusCarreira statusCarreira, Integer anoInicioAtividade) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.statusCarreira = statusCarreira;
         this.anoInicioAtividade = anoInicioAtividade;
     }
 
-    public String getNome() {
-        return this.nome;
-    }
-
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getNome() {
+        return nome;
     }
 
     public LocalDate getDataNascimento() {
@@ -40,6 +44,23 @@ public class Ator {
 
     public Integer getAnoInicioAtividade() {
         return anoInicioAtividade;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ator ator = (Ator) o;
+        return Objects.equals(id, ator.id) && Objects.equals(nome, ator.nome) && Objects.equals(dataNascimento, ator.dataNascimento) && statusCarreira == ator.statusCarreira && Objects.equals(anoInicioAtividade, ator.anoInicioAtividade);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, dataNascimento, statusCarreira, anoInicioAtividade);
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setNome(String nome) {
@@ -56,16 +77,5 @@ public class Ator {
 
     public void setAnoInicioAtividade(Integer anoInicioAtividade) {
         this.anoInicioAtividade = anoInicioAtividade;
-    }
-
-    @Override
-    public String toString() {
-        return "Ator{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", statusCarreira=" + statusCarreira +
-                ", anoInicioAtividade=" + anoInicioAtividade +
-                '}';
     }
 }

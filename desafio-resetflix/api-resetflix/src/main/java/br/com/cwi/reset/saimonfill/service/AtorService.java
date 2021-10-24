@@ -31,7 +31,6 @@ public class AtorService {
         verificaMesmoNome(atorRequest);
 
         List<Ator> atores = fakeDatabase.recuperaAtores();
-        final Integer idGerado = atores.size() + 1;
 
         for (Ator atorCadastrado : atores) {
             if (atorCadastrado.getNome().equalsIgnoreCase(atorRequest.getNome())) {
@@ -39,7 +38,6 @@ public class AtorService {
             }
         }
         final Ator ator = new Ator(
-                idGerado,
                 atorRequest.getNome(),
                 atorRequest.getDataNascimento(),
                 atorRequest.getStatusCarreira(),

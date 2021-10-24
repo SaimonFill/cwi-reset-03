@@ -32,16 +32,14 @@ public class FilmeService {
         List<PersonagemAtor> personagens = personagemService.cadastrarPersonagensFilme(filmeRequest.getPersonagens());
 
         List<Filme> idFilme = fakeDatabase.recuperaFilmes();
-        Integer id = idFilme.size() + 1;
 
         Filme filme = new Filme(
-                id,
                 filmeRequest.getNome(),
                 filmeRequest.getAnoLancamento(),
                 filmeRequest.getCapaFilme(),
                 filmeRequest.getGeneros(),
-                idDiretor,
                 idEstudio,
+                idDiretor,
                 personagens,
                 filmeRequest.getResumo()
         );
