@@ -2,6 +2,7 @@ package br.com.cwi.reset.saimonfill.request;
 
 import br.com.cwi.reset.saimonfill.model.StatusCarreira;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class AtorRequest {

@@ -106,9 +106,10 @@ public class EstudioService {
                     return estudio;
                 }
             }
-        } else {
-            throw new ConsultarPeloIdException("estudio", id);
         }
+//        else {
+//            throw new ConsultarPeloIdException("estudio", id);
+//        }
         return null;
     }
 }

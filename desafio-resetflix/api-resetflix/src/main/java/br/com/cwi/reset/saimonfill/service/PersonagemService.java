@@ -20,25 +20,25 @@ public class PersonagemService {
 
     public PersonagemService(FakeDatabase fakeDatabase) {
         this.fakeDatabase = fakeDatabase;
-        this.atorService = new AtorService((FakeDatabase.getInstance()));
+//        this.atorService = new AtorService((FakeDatabase.getInstance()));
     }
 
-    public PersonagemAtor cadastrarPersonagemAtor(PersonagemRequest personagemRequest) throws Exception {
-        new PersonagemRequestCamposObrigatoriosValidator().accept(personagemRequest);
-
-        final Integer idGerado = fakeDatabase.recuperaPersonagens().size() + 1;
-        final Ator ator = atorService.consultarAtor(personagemRequest.getIdAtor());
-
-        final PersonagemAtor personagemAtor = new PersonagemAtor(
-                ator,
-                personagemRequest.getNomePersonagem(),
-                personagemRequest.getDescricaoPersonagem(),
-                personagemRequest.getTipoAtuacao());
-
-        fakeDatabase.persistePersonagem(personagemAtor);
-
-        return personagemAtor;
-    }
+//    public PersonagemAtor cadastrarPersonagemAtor(PersonagemRequest personagemRequest) throws Exception {
+//        new PersonagemRequestCamposObrigatoriosValidator().accept(personagemRequest);
+//
+//        final Integer idGerado = fakeDatabase.recuperaPersonagens().size() + 1;
+//        final Ator ator = atorService.consultarAtor(personagemRequest.getIdAtor());
+//
+//        final PersonagemAtor personagemAtor = new PersonagemAtor(
+//                ator,
+//                personagemRequest.getNomePersonagem(),
+//                personagemRequest.getDescricaoPersonagem(),
+//                personagemRequest.getTipoAtuacao());
+//
+//        fakeDatabase.persistePersonagem(personagemAtor);
+//
+//        return personagemAtor;
+//    }
 
     public List<PersonagemAtor> consultarPersonagemAtor(String nome) throws Exception {
         return fakeDatabase.recuperaPersonagens();
@@ -67,9 +67,9 @@ public class PersonagemService {
 
         final List<PersonagemAtor> personagensAtores = new ArrayList<>();
 
-        for (PersonagemRequest request : personagens) {
-            personagensAtores.add(cadastrarPersonagemAtor(request));
-        }
+//        for (PersonagemRequest request : personagens) {
+//            personagensAtores.add(cadastrarPersonagemAtor(request));
+//        }
 
         return personagensAtores;
     }
